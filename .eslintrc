@@ -1,0 +1,46 @@
+{
+    "extends": "eslint:recommended",
+    
+    "ecmaFeatures": {
+        "modules": true,
+        "blockBindings": true,
+        "arrowFunctions": true,
+        "classes": true,
+        "jsx": true
+    },
+
+    "env": {
+        "browser": true,
+        "node": true
+    },
+
+    "plugins": [
+        "react"
+    ],
+
+    "rules": {
+        "semi": [2, "always"],
+        "indent": [2, 4],
+        "quotes": [2, "single", "avoid-escape"],
+        "no-multi-spaces": 2,
+        "no-trailing-spaces": 2,
+
+        "jsx-quotes": [2, "prefer-double"],
+        
+        "react/display-name": 0,
+        "react/jsx-boolean-value": 0,
+        "react/jsx-no-undef": 2,
+        "react/jsx-sort-props": 0,
+        "react/jsx-sort-prop-types": 0,
+        "react/jsx-uses-react": 2,
+        "react/jsx-uses-vars": 2,
+        "react/no-did-mount-set-state": 1,
+        "react/no-did-update-set-state": 1,
+        "react/no-multi-comp": 1,
+        "react/no-unknown-property": 1,
+        "react/prop-types": 0,
+        "react/react-in-jsx-scope": 1,
+        "react/self-closing-comp": 1,
+        "react/wrap-multilines": 2
+    }
+}
