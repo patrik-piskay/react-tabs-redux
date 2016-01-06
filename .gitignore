@@ -1,10 +1,5 @@
-# Dependency directory
-node_modules/
-
-# Compiled sources
-dist/*
-
-# Merge tools
+node_modules
+dist
+lib
 *.orig
-
 *.log
