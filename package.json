@@ -1,7 +1,7 @@
 {
-  "name": "react-project-starter",
+  "name": "react-tabs-redux",
   "version": "0.0.1",
-  "description": "",
+  "description": "Simple React tabs component that can be used with or without any Flux (e.g. Redux) implementation",
   "main": "lib/index.js",
   "scripts": {
     "start": "webpack-dev-server --progress --colors",
