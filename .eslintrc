@@ -3,15 +3,14 @@
     
     "ecmaFeatures": {
         "modules": true,
-        "blockBindings": true,
-        "arrowFunctions": true,
-        "classes": true,
-        "jsx": true
+        "jsx": true,
+        "experimentalObjectRestSpread": true
     },
 
     "env": {
         "browser": true,
-        "node": true
+        "node": true,
+        "es6": true
     },
 
     "plugins": [
