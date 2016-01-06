@@ -6,3 +6,5 @@ dist/*
 
 # Merge tools
 *.orig
+
+*.log
