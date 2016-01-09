@@ -1,11 +1,19 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { createStore } from 'redux';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 
 import App from './components';
 
 const CHANGE_SELECTED_TAB = 'CHANGE_SELECTED_TAB';
+
+function changeSelectedTab(selectedTab, tabNamespace) {
+    return {
+        type: CHANGE_SELECTED_TAB,
+        tab: selectedTab,
+        namespace: tabNamespace
+    };
+}
 
 const initialState = {
     tabs1: null,
@@ -27,9 +35,14 @@ function tabsReducer(state = initialState, action) {
 
 const store = createStore(tabsReducer);
 
+const ConnectedApp = connect(
+    (state) => state,
+    { changeSelectedTab }
+)(App);
+
 render(
     <Provider store={store}>
-        <App />
+        <ConnectedApp />
     </Provider>,
     document.getElementById('app')
 );

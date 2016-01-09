@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 import { Tabs, TabLink, TabContent } from '../../../../src';
 
@@ -33,16 +32,6 @@ const styles = {
         }
     }
 };
-
-const CHANGE_SELECTED_TAB = 'CHANGE_SELECTED_TAB';
-
-function changeSelectedTab(selectedTab, tabNamespace) {
-    return {
-        type: CHANGE_SELECTED_TAB,
-        tab: selectedTab,
-        namespace: tabNamespace
-    };
-}
 
 const App = (props) => (
     <div>
@@ -117,7 +106,4 @@ const App = (props) => (
     </div>
 );
 
-export default connect(
-    (state) => state,
-    { changeSelectedTab }
-)(App);
+export default App;
