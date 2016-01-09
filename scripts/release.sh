@@ -26,7 +26,6 @@ git commit --allow-empty -am "Version $next_version"
 git tag $next_ref
 
 git push origin master
-git push origin $next_ref
 
 npm run clean
 npm run build
