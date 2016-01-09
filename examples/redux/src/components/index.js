@@ -11,25 +11,23 @@ const styles = {
         marginRight: '30px',
         verticalAlign: 'top'
     },
-    tabs2: {
-        links: {
-            margin: 0,
-            padding: 0
-        },
-        tabLink: {
-            height: '30px',
-            lineHeight: '30px',
-            padding: '0 15px',
-            cursor: 'pointer',
-            borderBottom: '2px solid transparent',
-            display: 'inline-block'
-        },
-        activeLinkStyle: {
-            borderBottom: '2px solid #333'
-        },
-        content: {
-            padding: '0 15px'
-        }
+    links: {
+        margin: 0,
+        padding: 0
+    },
+    tabLink: {
+        height: '30px',
+        lineHeight: '30px',
+        padding: '0 15px',
+        cursor: 'pointer',
+        borderBottom: '2px solid transparent',
+        display: 'inline-block'
+    },
+    activeLinkStyle: {
+        borderBottom: '2px solid #333'
+    },
+    content: {
+        padding: '0 15px'
     }
 };
 
@@ -60,11 +58,11 @@ const App = (props) => (
                 </TabContent>
                 <TabContent for="tab2">
                     <h2>Tab2 content</h2>
-                    <div>Some other content here</div>
+                    <div>¯\_(ツ)_/¯</div>
                 </TabContent>
                 <TabContent for="tab3">
                     <h2>Tab3 content</h2>
-                    <div>Nothing here</div>
+                    <div>(╯°□°）╯︵ ┻━┻)</div>
                 </TabContent>
             </div>
         </Tabs>
@@ -73,16 +71,16 @@ const App = (props) => (
             name="tabs2"
             handleSelect={props.changeSelectedTab}
             selectedTab={props.tabs2}
-            activeLinkStyle={styles.tabs2.activeLinkStyle}
+            activeLinkStyle={styles.activeLinkStyle}
             style={styles.tabs}
         >
-            <div style={styles.tabs2.links}>
-                <TabLink to="tab1" default style={styles.tabs2.tabLink}>Tab1</TabLink>
-                <TabLink to="tab2" style={styles.tabs2.tabLink}>Tab2</TabLink>
-                <TabLink to="tab3" style={styles.tabs2.tabLink}>Tab3</TabLink>
+            <div style={styles.links}>
+                <TabLink to="tab1" default style={styles.tabLink}>Tab1</TabLink>
+                <TabLink to="tab2" style={styles.tabLink}>Tab2</TabLink>
+                <TabLink to="tab3" style={styles.tabLink}>Tab3</TabLink>
             </div>
 
-            <div style={styles.tabs2.content}>
+            <div style={styles.content}>
                 <TabContent for="tab1">
                     <h2>Tab1 content</h2>
                     <p>
@@ -95,11 +93,11 @@ const App = (props) => (
                 </TabContent>
                 <TabContent for="tab2">
                     <h2>Tab2 content</h2>
-                    <div>Some other content here</div>
+                    <div>¯\_(ツ)_/¯</div>
                 </TabContent>
                 <TabContent for="tab3">
                     <h2>Tab3 content</h2>
-                    <div>Nothing here</div>
+                    <div>(╯°□°）╯︵ ┻━┻)</div>
                 </TabContent>
             </div>
         </Tabs>

@@ -5,6 +5,8 @@ import { Provider, connect } from 'react-redux';
 
 import App from './components';
 
+// Action
+
 const CHANGE_SELECTED_TAB = 'CHANGE_SELECTED_TAB';
 
 function changeSelectedTab(selectedTab, tabNamespace) {
@@ -14,6 +16,8 @@ function changeSelectedTab(selectedTab, tabNamespace) {
         namespace: tabNamespace
     };
 }
+
+// Reducer
 
 const initialState = {
     tabs1: null,
@@ -33,7 +37,11 @@ function tabsReducer(state = initialState, action) {
     }
 }
 
+// Store
+
 const store = createStore(tabsReducer);
+
+// App
 
 const ConnectedApp = connect(
     (state) => state,
