@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rimraf lib dist",
     "build": "babel ./src -d lib",
-    "build:dist": "npm run clean && npm run build:umd && npm run build:umd:min",
+    "build:dist": "npm run build:umd && npm run build:umd:min",
     "build:umd": "NODE_ENV=production webpack src/index.js dist/react-tabs.js",
     "build:umd:min": "NODE_ENV=production webpack -p src/index.js dist/react-tabs.min.js",
     "lint": "eslint src && npm run lint-examples",

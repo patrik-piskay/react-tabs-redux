@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --progress --color",
-    "lint": "eslint src || exit 0"
+    "lint": "eslint src"
   },
   "author": "Patrik <piskay.patrik@gmail.com>",
   "license": "MIT",
