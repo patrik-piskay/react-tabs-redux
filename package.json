@@ -4,10 +4,11 @@
   "description": "Simple React tabs component that can be used with or without any Flux (e.g. Redux) implementation",
   "main": "lib/index.js",
   "scripts": {
-    "clean": "rm -R lib dist",
+    "clean": "rimraf lib dist",
     "build": "babel ./src -d lib",
-    "build-umd": "NODE_ENV=production webpack src/index.js dist/react-tabs.js",
-    "build-umd-min": "NODE_ENV=production webpack -p src/index.js dist/react-tabs.min.js",
+    "build:dist": "npm run clean && npm run build:umd && npm run build:umd:min",
+    "build:umd": "NODE_ENV=production webpack src/index.js dist/react-tabs.js",
+    "build:umd:min": "NODE_ENV=production webpack -p src/index.js dist/react-tabs.min.js",
     "lint": "eslint src && npm run lint-examples || exit 0",
     "lint-examples": "cd examples/redux && npm run lint && cd ../plain-react && npm run lint",
     "test": "mocha --compilers js:babel-core/register --recursive"
@@ -32,6 +33,7 @@
     "eslint-plugin-react": "^3.14.0",
     "mocha": "^2.3.4",
     "react": "^0.14.5",
+    "rimraf": "^2.5.0",
     "webpack": "^1.12.9"
   },
   "peerDependencies": {
