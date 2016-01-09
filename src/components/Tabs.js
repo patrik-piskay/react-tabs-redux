@@ -22,9 +22,13 @@ class Tabs extends Component {
 
         return React.Children.map(children, (child) => {
             if (child.props && child.props.to) {
+                const { activeLinkStyle, name } = this.props;
+
                 return React.cloneElement(child, {
                     handleSelect,
-                    isActive: child.props.to === selected
+                    isActive: child.props.to === selected,
+                    activeStyle: activeLinkStyle,
+                    namespace: name
                 });
             }
 
@@ -48,7 +52,9 @@ class Tabs extends Component {
         const children = this.transformChildren(this.props.children, handleSelect, selected);
 
         return (
-            <div>{children}</div>
+            <div {...this.props}>
+                {children}
+            </div>
         );
     }
 }

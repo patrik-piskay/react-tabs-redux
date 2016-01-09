@@ -23,6 +23,9 @@
         "quotes": [2, "single", "avoid-escape"],
         "no-multi-spaces": 2,
         "no-trailing-spaces": 2,
+        "space-before-blocks": [2, "always"],
+        "brace-style": [2, "1tbs", { "allowSingleLine": true }],
+        "object-curly-spacing": [2, "always"],
 
         "jsx-quotes": [2, "prefer-double"],
         
