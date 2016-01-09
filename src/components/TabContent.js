@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-const styles = {
+export const styles = {
     visible: {
         display: 'block'
     },

@@ -1,10 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 
-const styles = {
-    defaultActiveStyle: {
-        fontWeight: 'bold'
-    }
+export const defaultActiveStyle = {
+    fontWeight: 'bold'
 };
 
 class TabLink extends Component {
@@ -19,7 +17,7 @@ class TabLink extends Component {
         if (this.props.isActive) {
             style = {
                 ...style,
-                ...(this.props.activeStyle || styles.defaultActiveStyle)
+                ...(this.props.activeStyle || defaultActiveStyle)
             };
         }
 
