@@ -39,7 +39,7 @@ const App = (props) => (
             name="tabs1"
             className="tabs tabs-1"
             handleSelect={props.changeSelectedTab}
-            selected={props.tabs1}
+            selectedTab={props.tabs1}
         >
             <div className="tab-links">
                 <TabLink to="tab1" default>Tab1</TabLink>
@@ -72,7 +72,7 @@ const App = (props) => (
         <Tabs
             name="tabs2"
             handleSelect={props.changeSelectedTab}
-            selected={props.tabs2}
+            selectedTab={props.tabs2}
             activeLinkStyle={styles.tabs2.activeLinkStyle}
             style={styles.tabs}
         >

@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 class Tabs extends Component {
     constructor() {
         super();
 
         this.state = {
-            selected: null
+            selectedTab: null
         };
     }
 
     handleSelect(tab) {
         this.setState({
-            selected: tab
+            selectedTab: tab
         });
     }
 
-    transformChildren(children, handleSelect, selected) {
+    transformChildren(children, handleSelect, selectedTab) {
         if (typeof children !== 'object') {
             return children;
         }
@@ -26,7 +26,7 @@ class Tabs extends Component {
 
                 return React.cloneElement(child, {
                     handleSelect,
-                    isActive: child.props.to === selected,
+                    isActive: child.props.to === selectedTab,
                     activeStyle: activeLinkStyle,
                     namespace: name
                 });
@@ -34,22 +34,22 @@ class Tabs extends Component {
 
             if (child.props && child.props.for) {
                 return React.cloneElement(child, {
-                    visible: child.props.for === selected
+                    isVisible: child.props.for === selectedTab
                 });
             }
 
             return React.cloneElement(
                 child, {},
-                this.transformChildren(child.props && child.props.children, handleSelect, selected)
+                this.transformChildren(child.props && child.props.children, handleSelect, selectedTab)
             );
         });
     }
 
     render() {
         const handleSelect = this.props.handleSelect || this.handleSelect.bind(this);
-        const selected = this.props.selected || this.state.selected;
+        const selectedTab = this.props.selectedTab || this.state.selectedTab;
 
-        const children = this.transformChildren(this.props.children, handleSelect, selected);
+        const children = this.transformChildren(this.props.children, handleSelect, selectedTab);
 
         return (
             <div {...this.props}>
@@ -58,5 +58,12 @@ class Tabs extends Component {
         );
     }
 }
+
+Tabs.propTypes = {
+    name: PropTypes.string,
+    handleSelect: PropTypes.func,
+    selectedTab: PropTypes.string,
+    activeLinkStyle: PropTypes.object
+};
 
 export default Tabs;

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 
 const styles = {
@@ -37,5 +37,13 @@ class TabLink extends Component {
         );
     }
 }
+
+TabLink.propTypes = {
+    to: PropTypes.string.isRequired,
+    handleSelect: PropTypes.func,
+    isActive: PropTypes.bool,
+    namespace: PropTypes.string,
+    activeStyle: PropTypes.object
+};
 
 export default TabLink;

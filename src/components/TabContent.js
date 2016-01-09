@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 const styles = {
     visible: {
@@ -11,7 +11,7 @@ const styles = {
 
 class TabContent extends Component {
     render() {
-        const displayStyle = this.props.visible ? styles.visible : styles.hidden;
+        const displayStyle = this.props.isVisible ? styles.visible : styles.hidden;
 
         return (
             <div
@@ -23,5 +23,10 @@ class TabContent extends Component {
         );
     }
 }
+
+TabContent.propTypes = {
+    for: PropTypes.string.isRequired,
+    isVisible: PropTypes.bool
+};
 
 export default TabContent;
