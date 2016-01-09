@@ -1,7 +1,7 @@
 {
   "name": "react-tabs-redux",
   "version": "0.0.2",
-  "description": "Simple React tabs component that can be used with or without any Flux (e.g. Redux) implementation",
+  "description": "Simple, fully customizable React tabs component that can be used in plain React application or with any Flux-like architecture, e.g. Redux",
   "main": "lib/index.js",
   "scripts": {
     "clean": "rimraf lib dist",
