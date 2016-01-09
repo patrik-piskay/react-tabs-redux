@@ -1,0 +1,9 @@
+sudo: false
+language: node_js
+node_js:
+    - stable
+notifications:
+    email: false
+branches:
+    only:
+        - master
