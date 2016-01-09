@@ -20,6 +20,10 @@
     "flux"
   ],
   "author": "Patrik Piskay",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/patrik-piskay/react-tabs-redux"
+  },
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.3.17",
