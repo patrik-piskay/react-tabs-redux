@@ -15,7 +15,7 @@ class Tabs extends Component {
         });
     }
 
-    transformChildren(children, handleSelect, selectedTab) {
+    transformChildren(children, { handleSelect, selectedTab, firstLinkFound }) {
         if (typeof children !== 'object') {
             return children;
         }
@@ -23,12 +23,16 @@ class Tabs extends Component {
         return React.Children.map(children, (child) => {
             if (child.props && child.props.to) {
                 const { activeLinkStyle, name } = this.props;
+                const firstLink = !firstLinkFound;
+
+                firstLinkFound = true;
 
                 return React.cloneElement(child, {
                     handleSelect,
                     isActive: child.props.to === selectedTab,
                     activeStyle: activeLinkStyle,
-                    namespace: name
+                    namespace: name,
+                    firstLink
                 });
             }
 
@@ -40,7 +44,11 @@ class Tabs extends Component {
 
             return React.cloneElement(
                 child, {},
-                this.transformChildren(child.props && child.props.children, handleSelect, selectedTab)
+                this.transformChildren(child.props && child.props.children, {
+                    handleSelect,
+                    selectedTab,
+                    firstLinkFound
+                })
             );
         });
     }
@@ -49,7 +57,10 @@ class Tabs extends Component {
         const handleSelect = this.props.handleSelect || this.handleSelect.bind(this);
         const selectedTab = this.props.selectedTab || this.state.selectedTab;
 
-        const children = this.transformChildren(this.props.children, handleSelect, selectedTab);
+        const children = this.transformChildren(this.props.children, {
+            handleSelect,
+            selectedTab
+        });
 
         return (
             <div {...this.props}>

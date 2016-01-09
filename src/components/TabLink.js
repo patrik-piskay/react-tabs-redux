@@ -9,7 +9,7 @@ const styles = {
 
 class TabLink extends Component {
     componentDidMount() {
-        if (this.props.default) {
+        if (this.props.firstLink || this.props.default) {
             this.props.handleSelect(this.props.to, this.props.namespace);
         }
     }
@@ -43,7 +43,8 @@ TabLink.propTypes = {
     handleSelect: PropTypes.func,
     isActive: PropTypes.bool,
     namespace: PropTypes.string,
-    activeStyle: PropTypes.object
+    activeStyle: PropTypes.object,
+    firstLink: PropTypes.bool
 };
 
 export default TabLink;

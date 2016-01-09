@@ -40,7 +40,7 @@ const App = (props) => (
             selectedTab={props.tabs1}
         >
             <div className="tab-links">
-                <TabLink to="tab1" default>Tab1</TabLink>
+                <TabLink to="tab1">Tab1</TabLink>
                 <TabLink to="tab2">Tab2</TabLink>
                 <TabLink to="tab3">Tab3</TabLink>
             </div>
@@ -75,8 +75,8 @@ const App = (props) => (
             style={styles.tabs}
         >
             <div style={styles.links}>
-                <TabLink to="tab1" default style={styles.tabLink}>Tab1</TabLink>
-                <TabLink to="tab2" style={styles.tabLink}>Tab2</TabLink>
+                <TabLink to="tab1" style={styles.tabLink}>Tab1</TabLink>
+                <TabLink to="tab2" default style={styles.tabLink}>Tab2</TabLink>
                 <TabLink to="tab3" style={styles.tabLink}>Tab3</TabLink>
             </div>
 
