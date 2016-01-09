@@ -1,6 +1,10 @@
 node_modules/
+scripts/
+test/
 .babelrc
 .eslintrc
+.travis.yml
 webpack.config.js
+karma.conf.js
 *.log
 *.orig
