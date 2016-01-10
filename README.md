@@ -26,13 +26,13 @@ with components accessible via `window.ReactTabs` object.
 
 ```javascript
 <Tabs>
-    <TabLink to="tab1" />
-    <TabLink to="tab2" />
-    <TabLink to="tab3" />
+    <TabLink to="tab1">Tab1</TabLink>
+    <TabLink to="tab2">Tab2</TabLink>
+    <TabLink to="tab3">Tab3</TabLink>
 
-    <TabContent for="tab1" />
-    <TabContent for="tab2" />
-    <TabContent for="tab3" />
+    <TabContent for="tab1">{ /* content for tab #1 */ }</TabContent>
+    <TabContent for="tab2">{ /* content for tab #2 */ }</TabContent>
+    <TabContent for="tab3">{ /* content for tab #3 */ }</TabContent>
 </Tabs>
 ```
 
@@ -51,13 +51,13 @@ The only change needed from *plain React* example is to provide `handleSelect` a
     /* selected tab name retrieved from external state */
     selectedTab="tab2"
 >
-    <TabLink to="tab1" />
-    <TabLink to="tab2" />
-    <TabLink to="tab3" />
+    <TabLink to="tab1">Tab1</TabLink>
+    <TabLink to="tab2">Tab2</TabLink>
+    <TabLink to="tab3">Tab3</TabLink>
 
-    <TabContent for="tab1" />
-    <TabContent for="tab2" />
-    <TabContent for="tab3" />
+    <TabContent for="tab1">...</TabContent>
+    <TabContent for="tab2">...</TabContent>
+    <TabContent for="tab3">...</TabContent>
 </Tabs>
 ```
 -------------
@@ -66,13 +66,13 @@ By default, the first `<TabLink />` component is set to active. You can change t
 
 ```javascript
 <Tabs>
-    <TabLink to="tab1" />
-    <TabLink to="tab2" default />
-    <TabLink to="tab3" />
+    <TabLink to="tab1">Tab1</TabLink>
+    <TabLink to="tab2" default>Tab2</TabLink>
+    <TabLink to="tab3">Tab3</TabLink>
 
-    <TabContent for="tab1" />
-    <TabContent for="tab2" /> // this gets visible
-    <TabContent for="tab3" />
+    <TabContent for="tab1">...</TabContent>
+    <TabContent for="tab2">...</TabContent> // this gets visible
+    <TabContent for="tab3">...</TabContent>
 </Tabs>
 ```
 -------------
@@ -84,15 +84,15 @@ This will work then:
 ```javascript
 <Tabs>
     <ul>
-        <li><TabLink to="tab1" /></li>
-        <li><TabLink to="tab2" /></li>
-        <li><TabLink to="tab3" /></li>
+        <li><TabLink to="tab1">Tab1</TabLink></li>
+        <li><TabLink to="tab2">Tab2</TabLink></li>
+        <li><TabLink to="tab3">Tab3</TabLink></li>
     </ul>
 
     <div>
-        <TabContent for="tab1" />
-        <TabContent for="tab2" />
-        <TabContent for="tab3" />
+        <TabContent for="tab1">...</TabContent>
+        <TabContent for="tab2">...</TabContent>
+        <TabContent for="tab3">...</TabContent>
     </div>
 </Tabs>
 ```
@@ -109,17 +109,17 @@ There is couple of class names dynamically added to the components.
 
 ```javascript
 /* will receive `className="tab-link"` in props */
-<TabLink to="tab1" />
+<TabLink to="tab1">Tab1</TabLink>
 
 /* will receive `className="tab-link tab-link-active"` in props */
-<TabLink to="tab2" default />
+<TabLink to="tab2" default>Tab1</TabLink>
 ```
 
 `<TabContent />` will receive `tab-content` class name.
 
 ```javascript
 /* will receive `className="tab-content"` in props */
-<TabContent for="tab1" />
+<TabContent for="tab1">...</TabContent>
 ```
 
 #### Inline styles
@@ -133,11 +133,11 @@ To apply style for an active tab link, set the style as `activeLinkStyle` in pro
     style={/* styles for tabs wrapper */}
     activeLinkStyle={/* style that will be applied on the active `<TabLink />` */}
 >
-    <TabLink to="tab1" style={/* styles for inactive tab link */} />
-    <TabLink to="tab2" style={/* styles for inactive tab link */} />
+    <TabLink to="tab1" style={/* styles for inactive tab link */}> Tab1 </TabLink>
+    <TabLink to="tab2" style={/* styles for inactive tab link */}> Tab2 </TabLink>
 
-    <TabContent for="tab1" style={/* styles for tab content */} />
-    <TabContent for="tab2" style={/* styles for tab content */} />
+    <TabContent for="tab1" style={/* styles for tab content */}>...</TabContent>
+    <TabContent for="tab2" style={/* styles for tab content */}>...</TabContent>
 </Tabs>
 ```
 ----------
