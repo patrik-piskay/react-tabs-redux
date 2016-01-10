@@ -13,7 +13,7 @@ Using npm:
     $ npm install react-tabs-redux
 
 UMD build is also available:
-```javascript
+```html
 <script src="https://npmcdn.com/react-tabs-redux/dist/react-tabs.min.js"></script>
 ```
 with components accessible via `window.ReactTabs` object.
