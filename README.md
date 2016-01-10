@@ -30,9 +30,9 @@ with components accessible via `window.ReactTabs` object.
     <TabLink to="tab2">Tab2</TabLink>
     <TabLink to="tab3">Tab3</TabLink>
 
-    <TabContent for="tab1">{ /* content for tab #1 */ }</TabContent>
-    <TabContent for="tab2">{ /* content for tab #2 */ }</TabContent>
-    <TabContent for="tab3">{ /* content for tab #3 */ }</TabContent>
+    <TabContent for="tab1">/* content for tab #1 */</TabContent>
+    <TabContent for="tab2">/* content for tab #2 */</TabContent>
+    <TabContent for="tab3">/* content for tab #3 */</TabContent>
 </Tabs>
 ```
 
