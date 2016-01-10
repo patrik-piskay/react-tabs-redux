@@ -4,6 +4,8 @@
 
 Simple, fully customizable React tabs component that can be used in plain React application or with any Flux-like architecture with external application state, e.g. Redux.
 
+![React Tabs](https://res.cloudinary.com/web-development/image/upload/v1452427467/anim_fazjn9.gif)
+
 ## Installation
 
 Using npm:
