@@ -37,8 +37,7 @@ describe('Tabs component', () => {
 
         tabLinks.forEach((tabLink, index) => {
             assert.equal(tabLink.props.namespace, 'tabs');
-            assert.equal(tabLink.props.firstLink, index === 0);
-            assert.equal(tabLink.props.isActive, false);
+            assert.equal(tabLink.props.isActive, index === 0);
             assert.equal(typeof tabLink.props.activeStyle, 'undefined');
             assert.equal(typeof tabLink.props.handleSelect, 'function');
         });
@@ -158,8 +157,9 @@ describe('Tabs component', () => {
 
         const tabLinks = ReactTestUtils.scryRenderedDOMComponentsWithClass(tabs, 'tab-link');
 
-        assert.equal(tab, 'tab1');
-        assert.equal(namespace, 'tabs');
+        // handleSelect should not be called during initialization
+        assert.equal(tab, '');
+        assert.equal(namespace, '');
 
         ReactTestUtils.Simulate.click(tabLinks[1]);
 
