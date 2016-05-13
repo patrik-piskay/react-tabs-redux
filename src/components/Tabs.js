@@ -5,19 +5,21 @@ class Tabs extends Component {
         super();
 
         this.state = {
-            defaultTab: null,
             selectedTab: null
         };
     }
 
     handleSelect(tab) {
         this.setState({
-            ...this.state,
             selectedTab: tab
         });
     }
 
     findDefault(children) {
+        if (this.defaultTab) {
+            return this.defaultTab;
+        }
+
         let firstLink;
         let firstDefaultLink;
 
@@ -36,7 +38,8 @@ class Tabs extends Component {
 
         React.Children.forEach(children, traverse);
 
-        return firstDefaultLink || firstLink;
+        this.defaultTab = firstDefaultLink || firstLink;
+        return this.defaultTab;
     }
 
     transformChildren(children, { handleSelect, selectedTab, activeLinkStyle, name }) {
@@ -76,8 +79,7 @@ class Tabs extends Component {
         const handleSelect = this.props.handleSelect || this.handleSelect.bind(this);
         const selectedTab = this.props.selectedTab ||
             this.state.selectedTab ||
-            this.state.defaultTab ||
-            (this.state.defaultTab = this.findDefault(this.props.children));
+            this.findDefault(this.props.children);
 
         const children = this.transformChildren(this.props.children, {
             handleSelect,
