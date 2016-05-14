@@ -15,24 +15,45 @@ class Tabs extends Component {
         });
     }
 
-    transformChildren(children, { handleSelect, selectedTab, firstLinkFound }) {
+    findDefault(children) {
+        if (this.defaultTab) {
+            return this.defaultTab;
+        }
+
+        let firstLink;
+        let firstDefaultLink;
+
+        const traverse = (child) => {
+            if (!child.props || firstDefaultLink) {
+                return;
+            }
+
+            if (child.props.to) {
+                firstLink = firstLink || child.props.to;
+                firstDefaultLink = firstDefaultLink || (child.props.default && child.props.to);
+            }
+
+            React.Children.forEach(child.props.children, traverse);
+        };
+
+        React.Children.forEach(children, traverse);
+
+        this.defaultTab = firstDefaultLink || firstLink;
+        return this.defaultTab;
+    }
+
+    transformChildren(children, { handleSelect, selectedTab, activeLinkStyle, name }) {
         if (typeof children !== 'object') {
             return children;
         }
 
         return React.Children.map(children, (child) => {
             if (child.props && child.props.to) {
-                const { activeLinkStyle, name } = this.props;
-                const firstLink = !firstLinkFound;
-
-                firstLinkFound = true;
-
                 return React.cloneElement(child, {
                     handleSelect,
                     isActive: child.props.to === selectedTab,
                     activeStyle: activeLinkStyle,
-                    namespace: name,
-                    firstLink
+                    namespace: name
                 });
             }
 
@@ -47,7 +68,8 @@ class Tabs extends Component {
                 this.transformChildren(child.props && child.props.children, {
                     handleSelect,
                     selectedTab,
-                    firstLinkFound
+                    activeLinkStyle,
+                    name
                 })
             );
         });
@@ -55,11 +77,15 @@ class Tabs extends Component {
 
     render() {
         const handleSelect = this.props.handleSelect || this.handleSelect.bind(this);
-        const selectedTab = this.props.selectedTab || this.state.selectedTab;
+        const selectedTab = this.props.selectedTab ||
+            this.state.selectedTab ||
+            this.findDefault(this.props.children);
 
         const children = this.transformChildren(this.props.children, {
             handleSelect,
-            selectedTab
+            selectedTab,
+            activeLinkStyle: this.props.activeLinkStyle,
+            name: this.props.name
         });
 
         return (

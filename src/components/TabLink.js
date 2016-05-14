@@ -6,12 +6,6 @@ export const defaultActiveStyle = {
 };
 
 class TabLink extends Component {
-    componentDidMount() {
-        if (this.props.firstLink || this.props.default) {
-            this.props.handleSelect(this.props.to, this.props.namespace);
-        }
-    }
-
     render() {
         let style = { ...this.props.style };
         if (this.props.isActive) {
@@ -41,8 +35,7 @@ TabLink.propTypes = {
     handleSelect: PropTypes.func,
     isActive: PropTypes.bool,
     namespace: PropTypes.string,
-    activeStyle: PropTypes.object,
-    firstLink: PropTypes.bool
+    activeStyle: PropTypes.object
 };
 
 export default TabLink;
