@@ -7,6 +7,8 @@ class Tabs extends Component {
         this.state = {
             selectedTab: null
         };
+
+        this.handleSelect = this.handleSelect.bind(this);
     }
 
     handleSelect(tab) {
@@ -76,7 +78,7 @@ class Tabs extends Component {
     }
 
     render() {
-        const handleSelect = this.props.handleSelect || this.handleSelect.bind(this);
+        const handleSelect = this.props.handleSelect || this.handleSelect;
         const selectedTab = this.props.selectedTab ||
             this.state.selectedTab ||
             this.findDefault(this.props.children);
