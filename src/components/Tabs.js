@@ -44,7 +44,7 @@ class Tabs extends Component {
         return this.defaultTab;
     }
 
-    transformChildren(children, { handleSelect, selectedTab, activeLinkStyle, name }) {
+    transformChildren(children, { handleSelect, selectedTab, activeLinkStyle, visibleTabStyle, name }) {
         if (typeof children !== 'object') {
             return children;
         }
@@ -61,7 +61,8 @@ class Tabs extends Component {
 
             if (child.props && child.props.for) {
                 return React.cloneElement(child, {
-                    isVisible: child.props.for === selectedTab
+                    isVisible: child.props.for === selectedTab,
+                    visibleStyle: visibleTabStyle
                 });
             }
 
@@ -71,6 +72,7 @@ class Tabs extends Component {
                     handleSelect,
                     selectedTab,
                     activeLinkStyle,
+                    visibleTabStyle,
                     name
                 })
             );
@@ -87,6 +89,7 @@ class Tabs extends Component {
             handleSelect,
             selectedTab,
             activeLinkStyle: this.props.activeLinkStyle,
+            visibleTabStyle: this.props.visibleTabStyle,
             name: this.props.name
         });
 
@@ -102,7 +105,8 @@ Tabs.propTypes = {
     name: PropTypes.string,
     handleSelect: PropTypes.func,
     selectedTab: PropTypes.string,
-    activeLinkStyle: PropTypes.object
+    activeLinkStyle: PropTypes.object,
+    visibleTabStyle: PropTypes.object
 };
 
 export default Tabs;

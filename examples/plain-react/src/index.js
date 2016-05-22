@@ -27,6 +27,9 @@ const styles = {
     activeLinkStyle: {
         borderBottom: '2px solid #333'
     },
+    visibleTabStyle: {
+        display: 'inline-block'
+    },
     content: {
         padding: '0 15px'
     }
@@ -63,7 +66,7 @@ const App = () => (
             </div>
         </Tabs>
 
-        <Tabs activeLinkStyle={styles.activeLinkStyle} style={styles.tabs}>
+        <Tabs activeLinkStyle={styles.activeLinkStyle} visibleTabStyle={styles.visibleTabStyle} style={styles.tabs}>
             <div style={styles.links}>
                 <TabLink to="tab1" style={styles.tabLink}>Tab1</TabLink>
                 <TabLink to="tab2" default style={styles.tabLink}>Tab2</TabLink>

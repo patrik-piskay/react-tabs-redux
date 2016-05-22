@@ -135,8 +135,30 @@ describe('Tabs component', () => {
         assert.equal(findDOMNode(tabLinks[0]).getAttribute('class'), 'tab-link');
         assert.equal(findDOMNode(tabLinks[1]).getAttribute('class'), 'tab-link tab-link-active');
 
+
+        assert.equal(findDOMNode(tabContents[0]).getAttribute('class'), 'tab-content');
         assert.equal(findDOMNode(tabContents[0]).style.display, 'none');
+        assert.equal(findDOMNode(tabContents[1]).getAttribute('class'), 'tab-content tab-content-visible');
         assert.equal(findDOMNode(tabContents[1]).style.display, 'block');
+    });
+
+    it('should use custom styles for visible TabContent', () => {
+        const visibleTabStyle = {
+            display: 'flex',
+            backgroundColor: 'red'
+        };
+
+        let tabs = ReactTestUtils.renderIntoDocument(
+            <Tabs name="tabs" visibleTabStyle={visibleTabStyle}>
+                <TabLink to="tab1" default />
+                <TabContent for="tab1" />
+            </Tabs>
+        );
+
+        const tabContents = ReactTestUtils.scryRenderedDOMComponentsWithClass(tabs, 'tab-content');
+
+        assert.equal(findDOMNode(tabContents[0]).style.display, 'flex');
+        assert.equal(findDOMNode(tabContents[0]).style.backgroundColor, 'red');
     });
 
     it('should call custom "handleSelect" function when TabLink is clicked', () => {

@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import classNames from 'classnames';
 
 export const styles = {
     visible: {
@@ -11,11 +12,19 @@ export const styles = {
 
 class TabContent extends Component {
     render() {
-        const displayStyle = this.props.isVisible ? styles.visible : styles.hidden;
+        const visibleStyle = this.props.visibleStyle || {};
+
+        const displayStyle = this.props.isVisible ? {
+            ...styles.visible,
+            ...visibleStyle
+        } : styles.hidden;
 
         return (
             <div
-                className="tab-content"
+                className={classNames({
+                    'tab-content': true,
+                    'tab-content-visible': !!this.props.isVisible
+                })}
                 style={{ ...this.props.style, ...displayStyle }}
             >
                 {this.props.children}

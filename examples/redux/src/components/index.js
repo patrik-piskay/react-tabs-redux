@@ -26,6 +26,9 @@ const styles = {
     activeLinkStyle: {
         borderBottom: '2px solid #333'
     },
+    visibleTabStyle: {
+        display: 'inline-block'
+    },
     content: {
         padding: '0 15px'
     }
@@ -72,6 +75,7 @@ const App = (props) => (
             handleSelect={props.changeSelectedTab}
             selectedTab={props.tabs2}
             activeLinkStyle={styles.activeLinkStyle}
+            visibleTabStyle={styles.visibleTabStyle}
             style={styles.tabs}
         >
             <div style={styles.links}>
