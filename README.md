@@ -115,10 +115,12 @@ There is couple of class names dynamically added to the components.
 <TabLink to="tab2" default>Tab1</TabLink>
 ```
 
-`<TabContent />` will receive `tab-content` class name.
+`<TabContent />` will receive `tab-content` class name with `tab-content-visible` added when the content is visible (its corresponding `<TabLink />` is active).
+
+***NOTE:*** *As this library is supposed to work out of the box without any custom styles applied, `display: block` is applied to the visible `<TabContent>` component. If you want to override `display` value using `tab-content-visible` class name, you have to use `!important` flag to do so.*
 
 ```javascript
-/* will receive `className="tab-content"` in props */
+/* will receive `className="tab-content"` or `className="tab-content tab-content-visible"` in props */
 <TabContent for="tab1">...</TabContent>
 ```
 
@@ -127,11 +129,13 @@ There is couple of class names dynamically added to the components.
 If you prefer to use inline styles, you can set `style` in props of each of `<Tabs />`, `<TabLink />` and `<TabContent />` components.
 
 To apply style for an active tab link, set the style as `activeLinkStyle` in props of `<Tabs />` component.
+To apply style for a visible tab content, set the style as `visibleTabStyle` in props of `<Tabs />` component.
 
 ```javascript
 <Tabs
     style={/* styles for tabs wrapper */}
     activeLinkStyle={/* style that will be applied on the active `<TabLink />` */}
+    visibleTabStyle={/* style that will be applied on the visible `<TabContent />` */}
 >
     <TabLink to="tab1" style={/* styles for inactive tab link */}> Tab1 </TabLink>
     <TabLink to="tab2" style={/* styles for inactive tab link */}> Tab2 </TabLink>
