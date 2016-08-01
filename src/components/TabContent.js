@@ -34,7 +34,10 @@ class TabContent extends Component {
 }
 
 TabContent.propTypes = {
-    for: PropTypes.string.isRequired,
+    for: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]).isRequired,
     isVisible: PropTypes.bool
 };
 

@@ -6,6 +6,20 @@ export const defaultActiveStyle = {
 };
 
 class TabLink extends Component {
+    constructor() {
+        super();
+
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(e) {
+        this.props.handleSelect(this.props.to, this.props.namespace);
+
+        if (this.props.onClick) {
+            this.props.onClick(e);
+        }
+    }
+
     render() {
         let style = { ...this.props.style };
         if (this.props.isActive) {
@@ -22,7 +36,7 @@ class TabLink extends Component {
                     'tab-link-active': this.props.isActive
                 })}
                 style={style}
-                onClick={this.props.handleSelect.bind(this, this.props.to, this.props.namespace)}
+                onClick={this.handleClick}
             >
                 {this.props.children}
             </div>
@@ -31,7 +45,10 @@ class TabLink extends Component {
 }
 
 TabLink.propTypes = {
-    to: PropTypes.string.isRequired,
+    to: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]).isRequired,
     handleSelect: PropTypes.func,
     isActive: PropTypes.bool,
     namespace: PropTypes.string,

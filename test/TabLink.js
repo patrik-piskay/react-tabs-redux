@@ -103,6 +103,34 @@ describe('TabLink component', () => {
         assert.equal(clickedNamespace, 'tabs');
     });
 
+    it('should call custom "onChange" function if provided', () => {
+        let clickedTab = '';
+        let clickedNamespace = '';
+        let customOnClick = false;
+
+        let renderer = ReactTestUtils.createRenderer();
+        renderer.render(
+            <TabLink
+                to="tab1"
+                namespace="tabs"
+                handleSelect={(tab, namespace) => {
+                    clickedTab = tab;
+                    clickedNamespace = namespace;
+                }}
+                onClick={() => {
+                    customOnClick = true;
+                }}
+            />
+        );
+        const result = renderer.getRenderOutput();
+
+        result.props.onClick();
+
+        assert.equal(clickedTab, 'tab1');
+        assert.equal(clickedNamespace, 'tabs');
+        assert.equal(customOnClick, true);
+    });
+
     it('should have "isActive" prop when initialized', () => {
         let tabs = ReactTestUtils.renderIntoDocument(
             <TabLink
