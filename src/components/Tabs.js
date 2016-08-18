@@ -80,21 +80,28 @@ class Tabs extends Component {
     }
 
     render() {
-        const handleSelect = this.props.handleSelect || this.handleSelect;
-        const selectedTab = this.props.selectedTab ||
-            this.state.selectedTab ||
+        const {
+            handleSelect: handleSelectProp,
+            selectedTab: selectedTabProp,
+            activeLinkStyle,
+            visibleTabStyle,
+            name,
+            ...divProps
+        } = this.props;
+        const handleSelect = handleSelectProp || this.handleSelect;
+        const selectedTab = selectedTabProp || this.state.selectedTab ||
             this.findDefault(this.props.children);
 
         const children = this.transformChildren(this.props.children, {
             handleSelect,
             selectedTab,
-            activeLinkStyle: this.props.activeLinkStyle,
-            visibleTabStyle: this.props.visibleTabStyle,
-            name: this.props.name
+            activeLinkStyle,
+            visibleTabStyle,
+            name: name
         });
 
         return (
-            <div {...this.props}>
+            <div {...divProps}>
                 {children}
             </div>
         );
