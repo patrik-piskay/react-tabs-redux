@@ -10,8 +10,8 @@
   "author": "Patrik <piskay.patrik@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "react": "^0.14.5",
-    "react-dom": "^0.14.5"
+    "react": "*",
+    "react-dom": "*"
   },
   "devDependencies": {
     "babel-core": "^6.3.26",
