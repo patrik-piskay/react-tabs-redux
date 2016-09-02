@@ -14,7 +14,7 @@ Using npm:
 
 UMD build is also available:
 ```html
-<script src="https://npmcdn.com/react-tabs-redux/dist/react-tabs.min.js"></script>
+<script src="https://unpkg.com/react-tabs-redux/dist/react-tabs.min.js"></script>
 ```
 with components accessible via `window.ReactTabs` object.
 
