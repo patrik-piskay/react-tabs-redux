@@ -117,8 +117,6 @@ There is couple of class names dynamically added to the components.
 
 `<TabContent />` will receive `tab-content` class name with `tab-content-visible` added when the content is visible (its corresponding `<TabLink />` is active).
 
-***NOTE:*** *As this library is supposed to work out of the box without any custom styles applied, `display: block` is applied to the visible `<TabContent>` component. If you want to override `display` value using `tab-content-visible` class name, you have to use `!important` flag to do so.*
-
 ```javascript
 /* will receive `className="tab-content"` or `className="tab-content tab-content-visible"` in props */
 <TabContent for="tab1">...</TabContent>

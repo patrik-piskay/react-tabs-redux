@@ -27,7 +27,7 @@ describe('TabContent component', () => {
         assert.deepEqual(result2.props.style, styles.hidden);
     });
 
-    it('should be visible when "isVisible" prop is set', () => {
+    it('should not set hidden styles when "isVisible" prop is set', () => {
         let renderer = ReactTestUtils.createRenderer();
         renderer.render(
             <TabContent
@@ -37,7 +37,7 @@ describe('TabContent component', () => {
         );
         const result = renderer.getRenderOutput();
 
-        assert.deepEqual(result.props.style, styles.visible);
+        assert.deepEqual(result.props.style, {});
     });
 
     it('should use custom styles when provided', () => {
