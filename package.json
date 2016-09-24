@@ -1,6 +1,6 @@
 {
   "name": "react-tabs-redux",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "Simple, fully customizable React tabs component that can be used in plain React application or with any Flux-like architecture, e.g. Redux",
   "main": "lib/index.js",
   "scripts": {
