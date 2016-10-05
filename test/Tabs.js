@@ -77,7 +77,7 @@ describe('Tabs component', () => {
         });
     });
 
-    it('should set first TabLink to active and its content to visible when initialized', () => {
+    it('should set the first TabLink to active and its content to visible when initialized', () => {
         let tabs = ReactTestUtils.renderIntoDocument(
             <Tabs name="tabs">
                 <TabLink to="tab1" />
@@ -93,11 +93,11 @@ describe('Tabs component', () => {
         assert.equal(findDOMNode(tabLinks[0]).getAttribute('class'), 'tab-link tab-link-active');
         assert.equal(findDOMNode(tabLinks[1]).getAttribute('class'), 'tab-link');
 
-        assert.equal(findDOMNode(tabContents[0]).style.display, 'block');
+        assert.equal(findDOMNode(tabContents[0]).style.display, '');
         assert.equal(findDOMNode(tabContents[1]).style.display, 'none');
     });
 
-    it('should set TabLink with "default" prop to active and its content to visible when initialized', () => {
+    it('should set the TabLink with "default" prop to active and its content to visible when initialized', () => {
         let tabs = ReactTestUtils.renderIntoDocument(
             <Tabs name="tabs">
                 <TabLink to="tab1" />
@@ -114,7 +114,7 @@ describe('Tabs component', () => {
         assert.equal(findDOMNode(tabLinks[1]).getAttribute('class'), 'tab-link tab-link-active');
 
         assert.equal(findDOMNode(tabContents[0]).style.display, 'none');
-        assert.equal(findDOMNode(tabContents[1]).style.display, 'block');
+        assert.equal(findDOMNode(tabContents[1]).style.display, '');
     });
 
     it('should set TabContent to visible when TabLink is clicked', () => {
@@ -139,7 +139,7 @@ describe('Tabs component', () => {
         assert.equal(findDOMNode(tabContents[0]).getAttribute('class'), 'tab-content');
         assert.equal(findDOMNode(tabContents[0]).style.display, 'none');
         assert.equal(findDOMNode(tabContents[1]).getAttribute('class'), 'tab-content tab-content-visible');
-        assert.equal(findDOMNode(tabContents[1]).style.display, 'block');
+        assert.equal(findDOMNode(tabContents[1]).style.display, '');
     });
 
     it('should use custom styles for visible TabContent', () => {
@@ -206,6 +206,6 @@ describe('Tabs component', () => {
         assert.equal(findDOMNode(tabLinks[1]).getAttribute('class'), 'tab-link tab-link-active');
 
         assert.equal(findDOMNode(tabContents[0]).style.display, 'none');
-        assert.equal(findDOMNode(tabContents[1]).style.display, 'block');
+        assert.equal(findDOMNode(tabContents[1]).style.display, '');
     });
 });
