@@ -118,8 +118,4 @@ Tabs.propTypes = {
     renderActiveTabContentOnly: PropTypes.bool
 };
 
-Tabs.defaultProps = {
-    renderActiveTabContentOnly: false
-};
-
 export default Tabs;

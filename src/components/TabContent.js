@@ -8,8 +8,8 @@ export const styles = {
 };
 
 class TabContent extends Component {
-    canRenderChildren () {
-        return this.props.isVisible || (!this.props.isVisible && !this.props.renderActiveTabContentOnly);
+    canRenderChildren() {
+        return this.props.isVisible || !this.props.renderActiveTabContentOnly;
     }
 
     render() {
