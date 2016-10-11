@@ -208,4 +208,36 @@ describe('Tabs component', () => {
         assert.equal(findDOMNode(tabContents[0]).style.display, 'none');
         assert.equal(findDOMNode(tabContents[1]).style.display, '');
     });
+
+    it('should render only content of active tab', () => {
+        let tabs = ReactTestUtils.renderIntoDocument(
+          <Tabs name="tabs" selectedTab="tab2" renderActiveTabContentOnly>
+              <TabLink to="tab1" />
+              <TabLink to="tab2" />
+              <TabContent for="tab1">tabcontent1</TabContent>
+              <TabContent for="tab2">tabcontent2</TabContent>
+          </Tabs>
+        );
+
+        const tabContents = ReactTestUtils.scryRenderedDOMComponentsWithClass(tabs, 'tab-content');
+
+        assert.equal(findDOMNode(tabContents[0]).textContent, '');
+        assert.equal(findDOMNode(tabContents[1]).textContent, 'tabcontent2');
+    });
+
+    it('should render content of all tab, not just the active one', () => {
+        let tabs = ReactTestUtils.renderIntoDocument(
+          <Tabs name="tabs" selectedTab="tab2">
+              <TabLink to="tab1" />
+              <TabLink to="tab2" />
+              <TabContent for="tab1">tabcontent1</TabContent>
+              <TabContent for="tab2">tabcontent2</TabContent>
+          </Tabs>
+        );
+
+        const tabContents = ReactTestUtils.scryRenderedDOMComponentsWithClass(tabs, 'tab-content');
+
+        assert.equal(findDOMNode(tabContents[0]).textContent, 'tabcontent1');
+        assert.equal(findDOMNode(tabContents[1]).textContent, 'tabcontent2');
+    });
 });
