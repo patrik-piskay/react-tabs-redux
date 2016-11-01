@@ -8,6 +8,10 @@ export const styles = {
 };
 
 class TabContent extends Component {
+    canRenderChildren() {
+        return this.props.isVisible || !this.props.renderActiveTabContentOnly;
+    }
+
     render() {
         const visibleStyle = this.props.visibleStyle || {};
 
@@ -21,7 +25,9 @@ class TabContent extends Component {
                 })}
                 style={{ ...this.props.style, ...displayStyle }}
             >
-                {this.props.children}
+                {this.canRenderChildren() && (
+                  this.props.children
+                )}
             </div>
         );
     }
@@ -32,7 +38,9 @@ TabContent.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    isVisible: PropTypes.bool
+    visibleStyle: PropTypes.object,
+    isVisible: PropTypes.bool,
+    renderActiveTabContentOnly: PropTypes.bool
 };
 
 export default TabContent;

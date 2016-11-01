@@ -62,7 +62,8 @@ class Tabs extends Component {
             if (child.props && child.props.for) {
                 return React.cloneElement(child, {
                     isVisible: child.props.for === selectedTab,
-                    visibleStyle: visibleTabStyle
+                    visibleStyle: visibleTabStyle,
+                    renderActiveTabContentOnly: this.props.renderActiveTabContentOnly
                 });
             }
 
@@ -113,7 +114,8 @@ Tabs.propTypes = {
     handleSelect: PropTypes.func,
     selectedTab: PropTypes.string,
     activeLinkStyle: PropTypes.object,
-    visibleTabStyle: PropTypes.object
+    visibleTabStyle: PropTypes.object,
+    renderActiveTabContentOnly: PropTypes.bool
 };
 
 export default Tabs;
