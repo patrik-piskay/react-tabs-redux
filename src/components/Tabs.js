@@ -50,6 +50,9 @@ class Tabs extends Component {
         }
 
         return React.Children.map(children, (child) => {
+            if (!child) {
+                return child;
+            }
             if (child.props && child.props.to) {
                 return React.cloneElement(child, {
                     handleSelect,

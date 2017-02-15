@@ -240,4 +240,26 @@ describe('Tabs component', () => {
         assert.equal(findDOMNode(tabContents[0]).textContent, 'tabcontent1');
         assert.equal(findDOMNode(tabContents[1]).textContent, 'tabcontent2');
     });
+    it('should not crash when a child is null', () => {
+        let showTab3 = false;
+        let tabs = ReactTestUtils.renderIntoDocument(
+          <Tabs name="tabs" selectedTab="tab2">
+              <TabLink to="tab1" />
+              <TabLink to="tab2" />
+              {showTab3 &&
+                <TabLink to="tab2" />
+              }
+              <TabContent for="tab1">tabcontent1</TabContent>
+              <TabContent for="tab2">tabcontent2</TabContent>
+              {showTab3 &&
+                <TabContent for="tab3">tabcontent3</TabContent>
+              }
+          </Tabs>
+        );
+
+        const tabContents = ReactTestUtils.scryRenderedDOMComponentsWithClass(tabs, 'tab-content');
+
+        assert.equal(findDOMNode(tabContents[0]).textContent, 'tabcontent1');
+        assert.equal(findDOMNode(tabContents[1]).textContent, 'tabcontent2');
+    });
 });
