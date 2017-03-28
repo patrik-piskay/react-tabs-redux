@@ -90,7 +90,7 @@ class Tabs extends Component {
             activeLinkStyle,
             visibleTabStyle,
             name,
-            renderActiveTabContentOnly,
+            renderActiveTabContentOnly, // eslint-disable-line
             ...divProps
         } = this.props;
         const handleSelect = handleSelectProp || this.handleSelect;
