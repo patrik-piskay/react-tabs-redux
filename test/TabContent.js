@@ -57,4 +57,20 @@ describe('TabContent component', () => {
             ...styles.visible
         });
     });
+
+    it('should not set inline styles when "disableInlineStyles" props is set', () => {
+        const style = { backgroundColor: 'green' };
+        let renderer = ReactTestUtils.createRenderer();
+        renderer.render(
+            <TabContent
+                for="tab1"
+                isVisible={true}
+                style={style}
+                disableInlineStyles={true}
+            />
+        );
+        const result = renderer.getRenderOutput();
+
+        assert.equal(result.props.style, undefined);
+    });
 });
