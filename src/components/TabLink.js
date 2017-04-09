@@ -23,7 +23,7 @@ class TabLink extends Component {
     render() {
         let style = { ...this.props.style };
 
-        let disableInlineStyles = this.props.disableInlineStyles;
+        const disableInlineStyles = this.props.disableInlineStyles;
 
         if (this.props.isActive) {
             style = {
