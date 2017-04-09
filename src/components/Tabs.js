@@ -58,7 +58,7 @@ class Tabs extends Component {
                     handleSelect,
                     isActive: child.props.to === selectedTab,
                     activeStyle: activeLinkStyle,
-                    disableInlineStyles: child.props.disableInlineStyles !== undefined ? child.props.disableInlineStyles : disableInlineStyles,
+                    disableInlineStyles,
                     namespace: name
                 });
             }
@@ -67,7 +67,7 @@ class Tabs extends Component {
                 return React.cloneElement(child, {
                     isVisible: child.props.for === selectedTab,
                     visibleStyle: visibleTabStyle,
-                    disableInlineStyles: child.props.disableInlineStyles !== undefined ? child.props.disableInlineStyles : disableInlineStyles,
+                    disableInlineStyles,
                     renderActiveTabContentOnly: this.props.renderActiveTabContentOnly
                 });
             }

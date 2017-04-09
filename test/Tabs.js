@@ -263,7 +263,7 @@ describe('Tabs component', () => {
         assert.equal(findDOMNode(tabContents[1]).textContent, 'tabcontent2');
     });
 
-    it('should set "disableInlineStyles" prop to each child component, and allow overrides', () => {
+    it('should set "disableInlineStyles" prop to each child component', () => {
         const activeLinkStyle = { color: 'red' };
 
         let renderer = ReactTestUtils.createRenderer();
@@ -278,9 +278,9 @@ describe('Tabs component', () => {
         const result = renderer.getRenderOutput();
         const tabsChildren = result.props.children;
 
-        assert.equal(tabsChildren[0].props.disableInlineStyles, true);
-        assert.equal(tabsChildren[1].props.disableInlineStyles, false);
-        assert.equal(tabsChildren[2].props.disableInlineStyles, true);
-        assert.equal(tabsChildren[3].props.disableInlineStyles, false);
+        tabsChildren.forEach( child => {
+            assert.equal(child.props.disableInlineStyles, true);
+        });
+
     });
 });
