@@ -161,5 +161,41 @@ describe('TabLink component', () => {
         const result = renderer.getRenderOutput();
 
         assert.equal(result.props.style, undefined);
+
+    });
+
+    it('should support custom class names', () => {
+
+        let renderer = ReactTestUtils.createRenderer();
+
+        renderer.render(
+            <TabLink
+                to="tab1"
+                isActive={true}
+            />
+        );
+
+        const result1 = renderer.getRenderOutput();
+
+        renderer.render(
+            <TabLink
+                to="tab1"
+                isActive={true}
+                className='tab-link-custom'
+                activeClassName='tab-link-custom--active'
+            />
+        );
+
+        const result2 = renderer.getRenderOutput();
+
+        assert.equal(
+            result1.props.className.split(' ').sort().join(' '),
+            'tab-link tab-link-active'
+        );
+
+        assert.equal(
+            result2.props.className.split(' ').sort().join(' '),
+            'tab-link-custom tab-link-custom--active'
+        );
     });
 });

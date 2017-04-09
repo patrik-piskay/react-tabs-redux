@@ -13,7 +13,11 @@ var config = {
 
     externals: {
         // Use external version of React
-        react: 'React'
+        react: {
+            commonjs: "react",
+            amd: "react",
+            root: "React" // indicates global variable
+        }
     },
 
     module: {

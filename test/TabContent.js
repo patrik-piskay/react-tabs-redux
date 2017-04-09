@@ -61,6 +61,7 @@ describe('TabContent component', () => {
     it('should not set inline styles when "disableInlineStyles" props is set', () => {
         const style = { backgroundColor: 'green' };
         let renderer = ReactTestUtils.createRenderer();
+
         renderer.render(
             <TabContent
                 for="tab1"
@@ -72,5 +73,40 @@ describe('TabContent component', () => {
         const result = renderer.getRenderOutput();
 
         assert.equal(result.props.style, undefined);
+
+    });
+
+    it('should support custom class names', () => {
+        let renderer = ReactTestUtils.createRenderer();
+
+        renderer.render(
+            <TabContent
+                for="tab1"
+                isVisible={true}
+            />
+        );
+
+        const result1 = renderer.getRenderOutput();
+
+        renderer.render(
+            <TabContent
+                for="tab1"
+                isVisible={true}
+                className='test-custom-class'
+                visibleClassName='test-custom-class--visible'
+            />
+        );
+        const result2 = renderer.getRenderOutput();
+
+        assert.equal(
+            result1.props.className.split(' ').sort().join(' '),
+            'tab-content tab-content-visible'
+        );
+
+        assert.equal(
+            result2.props.className.split(' ').sort().join(' '),
+            'test-custom-class test-custom-class--visible'
+        );
+
     });
 });

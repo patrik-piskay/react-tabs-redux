@@ -32,11 +32,15 @@ class TabLink extends Component {
             };
         }
 
+        const className = this.props.className || 'tab-link';
+
+        const activeClassName = this.props.activeClassName || 'tab-link-active';
+
         return (
             <div
                 className={classNames({
-                    'tab-link': true,
-                    'tab-link-active': this.props.isActive
+                    [className]: true,
+                    [activeClassName]: this.props.isActive
                 })}
                 style={disableInlineStyles ? undefined : style}
                 onClick={this.handleClick}
@@ -56,7 +60,9 @@ TabLink.propTypes = {
     isActive: PropTypes.bool,
     namespace: PropTypes.string,
     activeStyle: PropTypes.object,
-    disableInlineStyles: PropTypes.bool
+    disableInlineStyles: PropTypes.bool,
+    className:  PropTypes.string,
+    activeClassName:  PropTypes.string
 };
 
 export default TabLink;
