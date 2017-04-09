@@ -57,4 +57,38 @@ describe('TabContent component', () => {
             ...styles.visible
         });
     });
+
+    it('should support custom class names', () => {
+        let renderer = ReactTestUtils.createRenderer();
+
+        renderer.render(
+            <TabContent
+                for="tab1"
+                isVisible={true}
+            />
+        );
+
+        const result1 = renderer.getRenderOutput();
+
+        renderer.render(
+            <TabContent
+                for="tab1"
+                isVisible={true}
+                className='test-custom-class'
+                visibleClassName='test-custom-class--visible'
+            />
+        );
+        const result2 = renderer.getRenderOutput();
+
+        assert.equal(
+            result1.props.className.split(' ').sort().join(' '),
+            'tab-content tab-content-visible'
+        );
+
+        assert.equal(
+            result2.props.className.split(' ').sort().join(' '),
+            'test-custom-class test-custom-class--visible'
+        );
+
+    });
 });

@@ -17,11 +17,15 @@ class TabContent extends Component {
 
         const displayStyle = this.props.isVisible ? visibleStyle : styles.hidden;
 
+        const className = this.props.className || 'tab-content';
+
+        const visibleClassName = this.props.visibleClassName || 'tab-content-visible';
+
         return (
             <div
                 className={classNames({
-                    'tab-content': true,
-                    'tab-content-visible': !!this.props.isVisible
+                    [className]: true,
+                    [visibleClassName]: !!this.props.isVisible
                 })}
                 style={{ ...this.props.style, ...displayStyle }}
             >
@@ -40,7 +44,9 @@ TabContent.propTypes = {
     ]).isRequired,
     visibleStyle: PropTypes.object,
     isVisible: PropTypes.bool,
-    renderActiveTabContentOnly: PropTypes.bool
+    renderActiveTabContentOnly: PropTypes.bool,
+    className: PropTypes.string,
+    visibleClassName: PropTypes.string
 };
 
 export default TabContent;
