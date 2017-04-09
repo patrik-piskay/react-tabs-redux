@@ -145,6 +145,25 @@ describe('TabLink component', () => {
         assert.equal(findDOMNode(tabLink).getAttribute('class'), 'tab-link tab-link-active');
     });
 
+    it('should not set inline styles when "disableInlineStyles" props is set', () => {
+        const linkStyle = { color: 'red' };
+
+        let renderer = ReactTestUtils.createRenderer();
+        renderer.render(
+            <TabLink
+                to="tab1"
+                handleSelect={() => {}}
+                style={linkStyle}
+                isActive={true}
+                disableInlineStyles={true}
+            />
+        );
+        const result = renderer.getRenderOutput();
+
+        assert.equal(result.props.style, undefined);
+
+    });
+
     it('should support custom class names', () => {
 
         let renderer = ReactTestUtils.createRenderer();

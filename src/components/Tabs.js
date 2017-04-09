@@ -44,7 +44,7 @@ class Tabs extends Component {
         return this.defaultTab;
     }
 
-    transformChildren(children, { handleSelect, selectedTab, activeLinkStyle, visibleTabStyle, name }) {
+    transformChildren(children, { handleSelect, selectedTab, activeLinkStyle, visibleTabStyle, disableInlineStyles, name }) {
         if (typeof children !== 'object') {
             return children;
         }
@@ -58,6 +58,7 @@ class Tabs extends Component {
                     handleSelect,
                     isActive: child.props.to === selectedTab,
                     activeStyle: activeLinkStyle,
+                    disableInlineStyles,
                     namespace: name
                 });
             }
@@ -66,6 +67,7 @@ class Tabs extends Component {
                 return React.cloneElement(child, {
                     isVisible: child.props.for === selectedTab,
                     visibleStyle: visibleTabStyle,
+                    disableInlineStyles,
                     renderActiveTabContentOnly: this.props.renderActiveTabContentOnly
                 });
             }
@@ -77,6 +79,7 @@ class Tabs extends Component {
                     selectedTab,
                     activeLinkStyle,
                     visibleTabStyle,
+                    disableInlineStyles,
                     name
                 })
             );
@@ -89,6 +92,7 @@ class Tabs extends Component {
             selectedTab: selectedTabProp,
             activeLinkStyle,
             visibleTabStyle,
+            disableInlineStyles,
             name,
             renderActiveTabContentOnly, // eslint-disable-line
             ...divProps
@@ -102,6 +106,7 @@ class Tabs extends Component {
             selectedTab,
             activeLinkStyle,
             visibleTabStyle,
+            disableInlineStyles,
             name: name
         });
 
@@ -119,6 +124,7 @@ Tabs.propTypes = {
     selectedTab: PropTypes.string,
     activeLinkStyle: PropTypes.object,
     visibleTabStyle: PropTypes.object,
+    disableInlineStyles: PropTypes.bool,
     renderActiveTabContentOnly: PropTypes.bool
 };
 
