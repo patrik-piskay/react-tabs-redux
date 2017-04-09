@@ -119,12 +119,13 @@ To override the default class names, `<TabLink/>` accepts a `className` prop, as
 
 `<TabContent />` will receive `tab-content` class name with `tab-content-visible` added when the content is visible (its corresponding `<TabLink />` is active).
 
-To override the default class names, `<TabContent />` accepts a `className` prop, as well as a `visibleClassName` prop.
-
 ```javascript
 /* will receive `className="tab-content"` or `className="tab-content tab-content-visible"` in props */
 <TabContent for="tab1">...</TabContent>
 ```
+
+To override the default class names, `<TabContent />` accepts a `className` prop, as well as a `visibleClassName` prop.
+
 
 #### Inline styles
 
