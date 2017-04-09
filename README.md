@@ -129,6 +129,8 @@ If you prefer to use inline styles, you can set `style` in props of each of `<Ta
 To apply style for an active tab link, set the style as `activeLinkStyle` in props of `<Tabs />` component.
 To apply style for a visible tab content, set the style as `visibleTabStyle` in props of `<Tabs />` component.
 
+By default, react-tabs-redux will apply `display: none` styles to the appropriate `<TabContent/>` component, and `font-weight: bold` to the appropriate `<TabLink/>` component.  If you would like to use classes to handle all of the styling, and disable even the default inline styles, you may pass `disableInlineStyles` as a prop to the parent `<Tabs/>` component.
+
 ```javascript
 <Tabs
     style={/* styles for tabs wrapper */}
