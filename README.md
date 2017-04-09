@@ -136,6 +136,7 @@ By default, react-tabs-redux will apply `display: none` styles to the appropriat
     style={/* styles for tabs wrapper */}
     activeLinkStyle={/* style that will be applied on the active `<TabLink />` */}
     visibleTabStyle={/* style that will be applied on the visible `<TabContent />` */}
+    disableInlineStyles={/* Boolean to toggle all inline styles */}
 >
     <TabLink to="tab1" style={/* styles for inactive tab link */}> Tab1 </TabLink>
     <TabLink to="tab2" style={/* styles for inactive tab link */}> Tab2 </TabLink>
