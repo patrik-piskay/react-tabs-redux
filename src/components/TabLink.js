@@ -22,6 +22,9 @@ class TabLink extends Component {
 
     render() {
         let style = { ...this.props.style };
+
+        let disableInlineStyles = this.props.disableInlineStyles;
+
         if (this.props.isActive) {
             style = {
                 ...style,
@@ -35,7 +38,7 @@ class TabLink extends Component {
                     'tab-link': true,
                     'tab-link-active': this.props.isActive
                 })}
-                style={style}
+                style={disableInlineStyles ? undefined : style}
                 onClick={this.handleClick}
             >
                 {this.props.children}
@@ -52,7 +55,8 @@ TabLink.propTypes = {
     handleSelect: PropTypes.func,
     isActive: PropTypes.bool,
     namespace: PropTypes.string,
-    activeStyle: PropTypes.object
+    activeStyle: PropTypes.object,
+    disableInlineStyles: PropTypes.bool
 };
 
 export default TabLink;
