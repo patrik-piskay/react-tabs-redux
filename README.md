@@ -24,7 +24,7 @@ with components accessible via `window.ReactTabs` object.
 
 - **with plain React** (using component's internal state) - [see example](https://github.com/patrik-piskay/react-tabs-redux/tree/master/examples/plain-react)
 
-```javascript
+```jsx
 <Tabs>
     <TabLink to="tab1">Tab1</TabLink>
     <TabLink to="tab2">Tab2</TabLink>
@@ -40,7 +40,7 @@ with components accessible via `window.ReactTabs` object.
 
 The only change needed from *plain React* example is to provide `handleSelect` and `selectedTab` (`name` as well if you want to have multiple `<Tabs />` instances in your app) props to `<Tabs />` component so that you are able to save and retrieve information about which tab is currently active from your external application state.
 
-```javascript
+```jsx
 <Tabs
     /* namespace for this <Tabs /> instance so you can keep track of
        multiple <Tabs /> instances in your external state */
@@ -64,7 +64,7 @@ The only change needed from *plain React* example is to provide `handleSelect` a
 
 By default, the first `<TabLink />` component is set to active. You can change this by specifying `default` in props of the `<TabLink />` component you want to become active instead.
 
-```javascript
+```jsx
 <Tabs>
     <TabLink to="tab1">Tab1</TabLink>
     <TabLink to="tab2" default>Tab2</TabLink>
@@ -81,7 +81,7 @@ By default, the first `<TabLink />` component is set to active. You can change t
 
 This will work then:
 
-```javascript
+```jsx
 <Tabs>
     <ul>
         <li><TabLink to="tab1">Tab1</TabLink></li>
@@ -97,17 +97,38 @@ This will work then:
 </Tabs>
 ```
 -------------
+
+If, for performance or other reasons, you wish to render only the content of the active tab to HTML and not render anything for the rest (not visible content), you may set an `renderActiveTabContentOnly` prop on `<Tabs />` component.
+
+```jsx
+<Tabs renderActiveTabContentOnly={true}>
+    <ul>
+        <li><TabLink to="tab1" default>Tab1</TabLink></li>
+        <li><TabLink to="tab2">Tab2</TabLink></li>
+        <li><TabLink to="tab3">Tab3</TabLink></li>
+    </ul>
+
+    <div>
+        <TabContent for="tab1">Content 1 /* rendered in HTML */</TabContent>
+        <TabContent for="tab2">Content 2 /* empty in HTML */</TabContent>
+        <TabContent for="tab3">Content 3 /* empty in HTML */</TabContent>
+    </div>
+</Tabs>
+```
+
+-------------
+
 See more in [examples](https://github.com/patrik-piskay/react-tabs-redux/tree/master/examples)
 
 ## Styling components
 
 #### Class names
 
-There is couple of class names dynamically added to the components.
+There is a couple of class names dynamically added to the components:
 
 `<TabLink />` will receive `tab-link` class name with `tab-link-active` added when tab is active.
 
-```javascript
+```jsx
 /* will receive `className="tab-link"` in props */
 <TabLink to="tab1">Tab1</TabLink>
 
@@ -117,9 +138,11 @@ There is couple of class names dynamically added to the components.
 
 To override the default class names, `<TabLink/>` accepts a `className` prop, as well as an `activeClassName` prop.
 
+-------------
+
 `<TabContent />` will receive `tab-content` class name with `tab-content-visible` added when the content is visible (its corresponding `<TabLink />` is active).
 
-```javascript
+```jsx
 /* will receive `className="tab-content"` or `className="tab-content tab-content-visible"` in props */
 <TabContent for="tab1">...</TabContent>
 ```
@@ -136,7 +159,7 @@ To apply style for a visible tab content, set the style as `visibleTabStyle` in 
 
 By default, react-tabs-redux will apply `display: none` styles to the appropriate `<TabContent/>` component, and `font-weight: bold` to the appropriate `<TabLink/>` component.  If you would like to use classes to handle all of the styling, and disable even the default inline styles, you may pass `disableInlineStyles` as a prop to the parent `<Tabs/>` component.
 
-```javascript
+```jsx
 <Tabs
     style={/* styles for tabs wrapper */}
     activeLinkStyle={/* style that will be applied on the active `<TabLink />` */}
