@@ -10,13 +10,7 @@ describe('TabLink component', () => {
         const linkStyle = { color: 'red' };
 
         let renderer = ReactTestUtils.createRenderer();
-        renderer.render(
-            <TabLink
-                to="tab1"
-                handleSelect={() => {}}
-                style={linkStyle}
-            />
-        );
+        renderer.render(<TabLink to="tab1" handleSelect={() => {}} style={linkStyle} />);
         const result = renderer.getRenderOutput();
 
         assert.equal(result.props.className, 'tab-link');
@@ -28,12 +22,7 @@ describe('TabLink component', () => {
 
         let renderer = ReactTestUtils.createRenderer();
         renderer.render(
-            <TabLink
-                to="tab1"
-                handleSelect={() => {}}
-                style={linkStyle}
-                isActive={true}
-            />
+            <TabLink to="tab1" handleSelect={() => {}} style={linkStyle} isActive={true} />
         );
         const result = renderer.getRenderOutput();
 
@@ -69,12 +58,7 @@ describe('TabLink component', () => {
 
     it('should have onClick handler set', () => {
         let renderer = ReactTestUtils.createRenderer();
-        renderer.render(
-            <TabLink
-                to="tab1"
-                handleSelect={() => {}}
-            />
-        );
+        renderer.render(<TabLink to="tab1" handleSelect={() => {}} />);
         const result = renderer.getRenderOutput();
 
         assert.equal(typeof result.props.onClick, 'function');
@@ -133,11 +117,7 @@ describe('TabLink component', () => {
 
     it('should have "isActive" prop when initialized', () => {
         let tabs = ReactTestUtils.renderIntoDocument(
-            <TabLink
-                to="tab1"
-                isActive={true}
-                handleSelect={() => {}}
-            />
+            <TabLink to="tab1" isActive={true} handleSelect={() => {}} />
         );
 
         const tabLink = ReactTestUtils.findRenderedDOMComponentWithClass(tabs, 'tab-link');
@@ -161,19 +141,12 @@ describe('TabLink component', () => {
         const result = renderer.getRenderOutput();
 
         assert.equal(result.props.style, undefined);
-
     });
 
     it('should support custom class names', () => {
-
         let renderer = ReactTestUtils.createRenderer();
 
-        renderer.render(
-            <TabLink
-                to="tab1"
-                isActive={true}
-            />
-        );
+        renderer.render(<TabLink to="tab1" isActive={true} />);
 
         const result1 = renderer.getRenderOutput();
 
@@ -181,8 +154,8 @@ describe('TabLink component', () => {
             <TabLink
                 to="tab1"
                 isActive={true}
-                className='tab-link-custom'
-                activeClassName='tab-link-custom--active'
+                className="tab-link-custom"
+                activeClassName="tab-link-custom--active"
             />
         );
 

@@ -14,13 +14,9 @@ class TabContent extends Component {
 
     render() {
         const visibleStyle = this.props.visibleStyle || {};
-
         const displayStyle = this.props.isVisible ? visibleStyle : styles.hidden;
-
         const disableInlineStyles = this.props.disableInlineStyles;
-
         const className = this.props.className || 'tab-content';
-
         const visibleClassName = this.props.visibleClassName || 'tab-content-visible';
 
         return (
@@ -29,21 +25,18 @@ class TabContent extends Component {
                     [className]: true,
                     [visibleClassName]: !!this.props.isVisible
                 })}
-                style={disableInlineStyles ? undefined : { ...this.props.style, ...displayStyle }}
+                style={
+                    (!disableInlineStyles && { ...this.props.style, ...displayStyle }) || undefined
+                }
             >
-                {this.canRenderChildren() && (
-                  this.props.children
-                )}
+                {this.canRenderChildren() && this.props.children}
             </div>
         );
     }
 }
 
 TabContent.propTypes = {
-    for: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ]).isRequired,
+    for: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     visibleStyle: PropTypes.object,
     isVisible: PropTypes.bool,
     renderActiveTabContentOnly: PropTypes.bool,

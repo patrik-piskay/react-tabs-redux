@@ -25,7 +25,7 @@ class Tabs extends Component {
         let firstLink;
         let firstDefaultLink;
 
-        const traverse = (child) => {
+        const traverse = child => {
             if (!child.props || firstDefaultLink) {
                 return;
             }
@@ -44,12 +44,15 @@ class Tabs extends Component {
         return this.defaultTab;
     }
 
-    transformChildren(children, { handleSelect, selectedTab, activeLinkStyle, visibleTabStyle, disableInlineStyles, name }) {
+    transformChildren(
+        children,
+        { handleSelect, selectedTab, activeLinkStyle, visibleTabStyle, disableInlineStyles, name }
+    ) {
         if (typeof children !== 'object') {
             return children;
         }
 
-        return React.Children.map(children, (child) => {
+        return React.Children.map(children, child => {
             if (!child) {
                 return child;
             }
@@ -73,7 +76,8 @@ class Tabs extends Component {
             }
 
             return React.cloneElement(
-                child, {},
+                child,
+                {},
                 this.transformChildren(child.props && child.props.children, {
                     handleSelect,
                     selectedTab,
@@ -98,8 +102,8 @@ class Tabs extends Component {
             ...divProps
         } = this.props;
         const handleSelect = handleSelectProp || this.handleSelect;
-        const selectedTab = selectedTabProp || this.state.selectedTab ||
-            this.findDefault(this.props.children);
+        const selectedTab =
+            selectedTabProp || this.state.selectedTab || this.findDefault(this.props.children);
 
         const children = this.transformChildren(this.props.children, {
             handleSelect,

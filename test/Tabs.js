@@ -56,7 +56,7 @@ describe('Tabs component', () => {
         const result = renderer.getRenderOutput();
         const tabLinks = result.props.children;
 
-        tabLinks.forEach((tabLink) => {
+        tabLinks.forEach(tabLink => {
             assert.deepEqual(tabLink.props.activeStyle, activeLinkStyle);
         });
     });
@@ -72,7 +72,7 @@ describe('Tabs component', () => {
         const result = renderer.getRenderOutput();
         const tabContents = result.props.children;
 
-        tabContents.forEach((tabLink) => {
+        tabContents.forEach(tabLink => {
             assert.equal(tabLink.props.isVisible, false);
         });
     });
@@ -135,10 +135,12 @@ describe('Tabs component', () => {
         assert.equal(findDOMNode(tabLinks[0]).getAttribute('class'), 'tab-link');
         assert.equal(findDOMNode(tabLinks[1]).getAttribute('class'), 'tab-link tab-link-active');
 
-
         assert.equal(findDOMNode(tabContents[0]).getAttribute('class'), 'tab-content');
         assert.equal(findDOMNode(tabContents[0]).style.display, 'none');
-        assert.equal(findDOMNode(tabContents[1]).getAttribute('class'), 'tab-content tab-content-visible');
+        assert.equal(
+            findDOMNode(tabContents[1]).getAttribute('class'),
+            'tab-content tab-content-visible'
+        );
         assert.equal(findDOMNode(tabContents[1]).style.display, '');
     });
 
@@ -211,12 +213,12 @@ describe('Tabs component', () => {
 
     it('should render only content of active tab', () => {
         let tabs = ReactTestUtils.renderIntoDocument(
-          <Tabs name="tabs" selectedTab="tab2" renderActiveTabContentOnly>
-              <TabLink to="tab1" />
-              <TabLink to="tab2" />
-              <TabContent for="tab1">tabcontent1</TabContent>
-              <TabContent for="tab2">tabcontent2</TabContent>
-          </Tabs>
+            <Tabs name="tabs" selectedTab="tab2" renderActiveTabContentOnly>
+                <TabLink to="tab1" />
+                <TabLink to="tab2" />
+                <TabContent for="tab1">tabcontent1</TabContent>
+                <TabContent for="tab2">tabcontent2</TabContent>
+            </Tabs>
         );
 
         const tabContents = ReactTestUtils.scryRenderedDOMComponentsWithClass(tabs, 'tab-content');
@@ -227,12 +229,12 @@ describe('Tabs component', () => {
 
     it('should render content of all tab, not just the active one', () => {
         let tabs = ReactTestUtils.renderIntoDocument(
-          <Tabs name="tabs" selectedTab="tab2">
-              <TabLink to="tab1" />
-              <TabLink to="tab2" />
-              <TabContent for="tab1">tabcontent1</TabContent>
-              <TabContent for="tab2">tabcontent2</TabContent>
-          </Tabs>
+            <Tabs name="tabs" selectedTab="tab2">
+                <TabLink to="tab1" />
+                <TabLink to="tab2" />
+                <TabContent for="tab1">tabcontent1</TabContent>
+                <TabContent for="tab2">tabcontent2</TabContent>
+            </Tabs>
         );
 
         const tabContents = ReactTestUtils.scryRenderedDOMComponentsWithClass(tabs, 'tab-content');
@@ -243,18 +245,14 @@ describe('Tabs component', () => {
     it('should not crash when a child is null', () => {
         let showTab3 = false;
         let tabs = ReactTestUtils.renderIntoDocument(
-          <Tabs name="tabs" selectedTab="tab2">
-              <TabLink to="tab1" />
-              <TabLink to="tab2" />
-              {showTab3 &&
+            <Tabs name="tabs" selectedTab="tab2">
+                <TabLink to="tab1" />
                 <TabLink to="tab2" />
-              }
-              <TabContent for="tab1">tabcontent1</TabContent>
-              <TabContent for="tab2">tabcontent2</TabContent>
-              {showTab3 &&
-                <TabContent for="tab3">tabcontent3</TabContent>
-              }
-          </Tabs>
+                {showTab3 && <TabLink to="tab2" />}
+                <TabContent for="tab1">tabcontent1</TabContent>
+                <TabContent for="tab2">tabcontent2</TabContent>
+                {showTab3 && <TabContent for="tab3">tabcontent3</TabContent>}
+            </Tabs>
         );
 
         const tabContents = ReactTestUtils.scryRenderedDOMComponentsWithClass(tabs, 'tab-content');
@@ -278,9 +276,8 @@ describe('Tabs component', () => {
         const result = renderer.getRenderOutput();
         const tabsChildren = result.props.children;
 
-        tabsChildren.forEach( child => {
+        tabsChildren.forEach(child => {
             assert.equal(child.props.disableInlineStyles, true);
         });
-
     });
 });

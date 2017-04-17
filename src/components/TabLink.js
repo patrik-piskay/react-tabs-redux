@@ -21,20 +21,13 @@ class TabLink extends Component {
     }
 
     render() {
-        let style = { ...this.props.style };
-
         const disableInlineStyles = this.props.disableInlineStyles;
-
-        if (this.props.isActive) {
-            style = {
-                ...style,
-                ...(this.props.activeStyle || defaultActiveStyle)
-            };
-        }
-
         const className = this.props.className || 'tab-link';
-
         const activeClassName = this.props.activeClassName || 'tab-link-active';
+        const style = {
+            ...this.props.style,
+            ...((this.props.isActive && (this.props.activeStyle || defaultActiveStyle)) || {})
+        };
 
         return (
             <div
@@ -42,7 +35,7 @@ class TabLink extends Component {
                     [className]: true,
                     [activeClassName]: this.props.isActive
                 })}
-                style={disableInlineStyles ? undefined : style}
+                style={(!disableInlineStyles && style) || undefined}
                 onClick={this.handleClick}
             >
                 {this.props.children}
@@ -52,17 +45,14 @@ class TabLink extends Component {
 }
 
 TabLink.propTypes = {
-    to: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ]).isRequired,
+    to: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     handleSelect: PropTypes.func,
     isActive: PropTypes.bool,
     namespace: PropTypes.string,
     activeStyle: PropTypes.object,
     disableInlineStyles: PropTypes.bool,
-    className:  PropTypes.string,
-    activeClassName:  PropTypes.string
+    className: PropTypes.string,
+    activeClassName: PropTypes.string
 };
 
 export default TabLink;

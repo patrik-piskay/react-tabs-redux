@@ -7,19 +7,10 @@ import TabContent, { styles } from '../src/components/TabContent.js';
 describe('TabContent component', () => {
     it('should have correct default values set', () => {
         let renderer = ReactTestUtils.createRenderer();
-        renderer.render(
-            <TabContent
-                for="tab1"
-            />
-        );
+        renderer.render(<TabContent for="tab1" />);
         const result1 = renderer.getRenderOutput();
 
-        renderer.render(
-            <TabContent
-                for="tab1"
-                isVisible={false}
-            />
-        );
+        renderer.render(<TabContent for="tab1" isVisible={false} />);
         const result2 = renderer.getRenderOutput();
 
         assert.equal(result1.props.className, 'tab-content');
@@ -29,12 +20,7 @@ describe('TabContent component', () => {
 
     it('should not set hidden styles when "isVisible" prop is set', () => {
         let renderer = ReactTestUtils.createRenderer();
-        renderer.render(
-            <TabContent
-                for="tab1"
-                isVisible={true}
-            />
-        );
+        renderer.render(<TabContent for="tab1" isVisible={true} />);
         const result = renderer.getRenderOutput();
 
         assert.deepEqual(result.props.style, {});
@@ -43,13 +29,7 @@ describe('TabContent component', () => {
     it('should use custom styles when provided', () => {
         const style = { backgroundColor: 'green' };
         let renderer = ReactTestUtils.createRenderer();
-        renderer.render(
-            <TabContent
-                for="tab1"
-                isVisible={true}
-                style={style}
-            />
-        );
+        renderer.render(<TabContent for="tab1" isVisible={true} style={style} />);
         const result = renderer.getRenderOutput();
 
         assert.deepEqual(result.props.style, {
@@ -63,28 +43,17 @@ describe('TabContent component', () => {
         let renderer = ReactTestUtils.createRenderer();
 
         renderer.render(
-            <TabContent
-                for="tab1"
-                isVisible={true}
-                style={style}
-                disableInlineStyles={true}
-            />
+            <TabContent for="tab1" isVisible={true} style={style} disableInlineStyles={true} />
         );
         const result = renderer.getRenderOutput();
 
         assert.equal(result.props.style, undefined);
-
     });
 
     it('should support custom class names', () => {
         let renderer = ReactTestUtils.createRenderer();
 
-        renderer.render(
-            <TabContent
-                for="tab1"
-                isVisible={true}
-            />
-        );
+        renderer.render(<TabContent for="tab1" isVisible={true} />);
 
         const result1 = renderer.getRenderOutput();
 
@@ -92,8 +61,8 @@ describe('TabContent component', () => {
             <TabContent
                 for="tab1"
                 isVisible={true}
-                className='test-custom-class'
-                visibleClassName='test-custom-class--visible'
+                className="test-custom-class"
+                visibleClassName="test-custom-class--visible"
             />
         );
         const result2 = renderer.getRenderOutput();
@@ -107,6 +76,5 @@ describe('TabContent component', () => {
             result2.props.className.split(' ').sort().join(' '),
             'test-custom-class test-custom-class--visible'
         );
-
     });
 });
