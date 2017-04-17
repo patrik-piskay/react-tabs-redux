@@ -1,0 +1,20 @@
+<Accordion allowMultiple={true}  >
+  {groupArray.keySeq().toArray().map((item) => {
+    return (
+      <AccordionItem key={item} title={`${item} (${groupSize(item)})`} slug={item}>
+        <ul>
+          {buildAccordion(item)}
+        </ul>
+      </AccordionItem>
+
+      <Tabs
+          style={/* styles for tabs wrapper */}
+          activeLinkStyle={/* style that will be applied on the active `<TabLink />` */}
+          visibleTabStyle={/* style that will be applied on the visible `<TabContent />` */}
+      >
+          <TabLink to="tab1" style={/* styles for inactive tab link */}> Tab1 </TabLink>
+          <TabLink to="tab2" style={/* styles for inactive tab link */}> Tab2 </TabLink>
+
+          <TabContent for="tab1" style={/* styles for tab content */}>...</TabContent>
+          <TabContent for="tab2" style={/* styles for tab content */}>...</TabContent>
+      </Tabs>

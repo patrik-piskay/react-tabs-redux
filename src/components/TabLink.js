@@ -29,6 +29,9 @@ class TabLink extends Component {
             style = {
                 ...style,
                 ...(this.props.activeStyle || defaultActiveStyle)
+                /* default active style */
+                margin-left: 1erm;
+                /* take styles from _sidebar.scss */
             };
         }
 
@@ -46,6 +49,7 @@ class TabLink extends Component {
                 onClick={this.handleClick}
             >
                 {this.props.children}
+                /* ADD NEW PROP HERE */
             </div>
         );
     }

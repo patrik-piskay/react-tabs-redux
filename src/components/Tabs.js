@@ -42,6 +42,7 @@ class Tabs extends Component {
 
         this.defaultTab = firstDefaultLink || firstLink;
         return this.defaultTab;
+
     }
 
     transformChildren(children, { handleSelect, selectedTab, activeLinkStyle, visibleTabStyle, disableInlineStyles, name }) {
