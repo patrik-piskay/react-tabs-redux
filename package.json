@@ -55,6 +55,7 @@
     "react": "^0.14.5 || ^15.0"
   },
   "dependencies": {
-    "classnames": "^2.2.3"
+    "classnames": "^2.2.3",
+    "prop-types": "^15.5.7"
   }
 }
