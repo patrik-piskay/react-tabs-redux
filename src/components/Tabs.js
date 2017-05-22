@@ -27,7 +27,7 @@ class Tabs extends Component {
         let firstDefaultLink;
 
         const traverse = child => {
-            if (!child.props || firstDefaultLink) {
+            if (!child || !child.props || firstDefaultLink) {
                 return;
             }
 
