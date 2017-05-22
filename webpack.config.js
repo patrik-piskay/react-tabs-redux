@@ -18,6 +18,12 @@ var config = {
             commonjs2: 'react',
             amd: 'react',
             root: 'React' // indicates global variable
+        },
+        'prop-types': {
+            commonjs: 'prop-types',
+            commonjs2: 'prop-types',
+            amd: 'prop-types',
+            root: 'PropTypes'
         }
     },
 
