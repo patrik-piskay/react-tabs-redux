@@ -4,7 +4,8 @@ import classNames from 'classnames';
 
 export const styles = {
     hidden: {
-        display: 'none'
+        height: 0,
+        overflow: 'hidden'
     }
 };
 
@@ -22,6 +23,7 @@ class TabContent extends Component {
 
         return (
             <div
+                onFocus={this.props.onFocus}
                 className={classNames({
                     [className]: true,
                     [visibleClassName]: !!this.props.isVisible
@@ -43,6 +45,7 @@ TabContent.propTypes = {
     renderActiveTabContentOnly: PropTypes.bool,
     disableInlineStyles: PropTypes.bool,
     className: PropTypes.string,
+    onFocus: PropTypes.func,
     visibleClassName: PropTypes.string
 };
 
