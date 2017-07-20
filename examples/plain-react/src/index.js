@@ -47,21 +47,26 @@ const App = () => (
             <div className="content">
                 <TabContent for="tab1">
                     <h2>Tab1 content</h2>
+                    <input tabIndex="1" />
                     <p>
                         Lorem ipsum dolor sit amet, in vel malorum adipiscing. Duis deleniti ei cum, amet graece nec an.
                         Eu vix sumo atqui apeirian, nullam integre accusamus his at, animal feugiat in sed.
                     </p>
+                    <input tabIndex="3" />
                     <p>
                         Pro vitae percipit no. Per ignota audire no. Ex hinc mutat delicata sit, sit eu erant tempor vivendo. Ad modus nusquam recusabo sit. Per ne deserunt periculis, ad sea saepe perfecto expetendis, est nonumy contentiones voluptatibus cu.
                     </p>
+                    <input tabIndex="2" />
                 </TabContent>
                 <TabContent for="tab2">
                     <h2>Tab2 content</h2>
                     <div>¯\_(ツ)_/¯</div>
+                    <input tabIndex="5" />
                 </TabContent>
                 <TabContent for="tab3">
                     <h2>Tab3 content</h2>
                     <div>(╯°□°）╯︵ ┻━┻)</div>
+                    <input tabIndex="4" />
                 </TabContent>
             </div>
         </Tabs>
@@ -83,14 +88,17 @@ const App = () => (
                     <p>
                         Pro vitae percipit no. Per ignota audire no. Ex hinc mutat delicata sit, sit eu erant tempor vivendo. Ad modus nusquam recusabo sit. Per ne deserunt periculis, ad sea saepe perfecto expetendis, est nonumy contentiones voluptatibus cu.
                     </p>
+                    <input />
                 </TabContent>
                 <TabContent for="tab2">
                     <h2>Tab2 content</h2>
                     <div>¯\_(ツ)_/¯</div>
+                    <input />
                 </TabContent>
                 <TabContent for="tab3">
                     <h2>Tab3 content</h2>
                     <div>(╯°□°）╯︵ ┻━┻)</div>
+                    <input />
                 </TabContent>
             </div>
         </Tabs>

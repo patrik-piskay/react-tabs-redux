@@ -93,8 +93,8 @@ describe('Tabs component', () => {
         assert.equal(findDOMNode(tabLinks[0]).getAttribute('class'), 'tab-link tab-link-active');
         assert.equal(findDOMNode(tabLinks[1]).getAttribute('class'), 'tab-link');
 
-        assert.equal(findDOMNode(tabContents[0]).style.display, '');
-        assert.equal(findDOMNode(tabContents[1]).style.display, 'none');
+        assert.equal(findDOMNode(tabContents[0]).style.overflow, '');
+        assert.equal(findDOMNode(tabContents[1]).style.overflow, 'hidden');
     });
 
     it('should set the TabLink with "default" prop to active and its content to visible when initialized', () => {
@@ -113,8 +113,8 @@ describe('Tabs component', () => {
         assert.equal(findDOMNode(tabLinks[0]).getAttribute('class'), 'tab-link');
         assert.equal(findDOMNode(tabLinks[1]).getAttribute('class'), 'tab-link tab-link-active');
 
-        assert.equal(findDOMNode(tabContents[0]).style.display, 'none');
-        assert.equal(findDOMNode(tabContents[1]).style.display, '');
+        assert.equal(findDOMNode(tabContents[0]).style.overflow, 'hidden');
+        assert.equal(findDOMNode(tabContents[1]).style.overflow, '');
     });
 
     it('should set TabContent to visible when TabLink is clicked', () => {
@@ -136,7 +136,7 @@ describe('Tabs component', () => {
         assert.equal(findDOMNode(tabLinks[1]).getAttribute('class'), 'tab-link tab-link-active');
 
         assert.equal(findDOMNode(tabContents[0]).getAttribute('class'), 'tab-content');
-        assert.equal(findDOMNode(tabContents[0]).style.display, 'none');
+        assert.equal(findDOMNode(tabContents[0]).style.overflow, 'hidden');
         assert.equal(
             findDOMNode(tabContents[1]).getAttribute('class'),
             'tab-content tab-content-visible'
@@ -207,8 +207,8 @@ describe('Tabs component', () => {
         assert.equal(findDOMNode(tabLinks[0]).getAttribute('class'), 'tab-link');
         assert.equal(findDOMNode(tabLinks[1]).getAttribute('class'), 'tab-link tab-link-active');
 
-        assert.equal(findDOMNode(tabContents[0]).style.display, 'none');
-        assert.equal(findDOMNode(tabContents[1]).style.display, '');
+        assert.equal(findDOMNode(tabContents[0]).style.overflow, 'hidden');
+        assert.equal(findDOMNode(tabContents[1]).style.overflow, '');
     });
 
     it('should render only content of active tab', () => {
@@ -279,5 +279,127 @@ describe('Tabs component', () => {
         tabsChildren.forEach(child => {
             assert.equal(child.props.disableInlineStyles, true);
         });
+    });
+
+    it('should change current tab when focusing an input from another tab', () => {
+        let firedFocus = 0;
+
+        let tabs = ReactTestUtils.renderIntoDocument(
+            <Tabs name="tabs">
+                <TabLink to="tab1" />
+                <TabLink to="tab2" />
+                <TabContent for="tab1"><input /></TabContent>
+                <TabContent for="tab2" onFocus={e => {
+                    ++firedFocus;
+                }}><input /></TabContent>
+            </Tabs>
+        );
+
+        const tabContents = ReactTestUtils.scryRenderedDOMComponentsWithClass(tabs, 'tab-content');
+        const inputs = ReactTestUtils.scryRenderedDOMComponentsWithTag(tabs, 'input');
+
+        assert.equal(inputs.length, 2);
+
+        assert.equal(firedFocus, 0);
+        assert.equal(findDOMNode(tabContents[0]).style.overflow, '');
+        assert.equal(findDOMNode(tabContents[1]).style.overflow, 'hidden');
+
+        ReactTestUtils.Simulate.focus(inputs[1]);
+
+        assert.equal(firedFocus, 1);
+        assert.equal(findDOMNode(tabContents[0]).style.overflow, 'hidden');
+        assert.equal(findDOMNode(tabContents[1]).style.overflow, '');
+
+        ReactTestUtils.Simulate.focus(inputs[1]);
+
+        assert.equal(firedFocus, 2);
+        assert.equal(findDOMNode(tabContents[0]).style.overflow, 'hidden');
+        assert.equal(findDOMNode(tabContents[1]).style.overflow, '');
+    });
+
+    it('should call custom "handleSelect" function when navigating between tabs', () => {
+        let firedSelectHandler = 0;
+        let firedFocus = 0;
+        let selectedTab = "tab1";
+
+        const render = (visibleTabIndex, focusCounter, handlerCounter) => {
+            let tabs = ReactTestUtils.renderIntoDocument(
+                <Tabs name="tabs" handleSelect={(tab) => {
+                    ++firedSelectHandler;
+                    selectedTab = tab;
+                }} selectedTab={selectedTab}>
+                    <TabLink to="tab1" />
+                    <TabLink to="tab2" />
+                    <TabContent for="tab1"><input /></TabContent>
+                    <TabContent for="tab2" onFocus={e => {
+                        ++firedFocus;
+                    }}><input /></TabContent>
+                </Tabs>
+            );
+
+            const tabContents = ReactTestUtils.scryRenderedDOMComponentsWithClass(tabs, 'tab-content');
+            const inputs = ReactTestUtils.scryRenderedDOMComponentsWithTag(tabs, 'input');
+
+            assert.equal(inputs.length, 2);
+
+            assert.equal(selectedTab, "tab" + (1 + visibleTabIndex));
+            assert.equal(firedFocus, focusCounter);
+            assert.equal(firedSelectHandler, handlerCounter);
+            assert.equal(findDOMNode(tabContents[visibleTabIndex]).style.overflow, '');
+            assert.equal(findDOMNode(tabContents[(1 + visibleTabIndex) % 2]).style.overflow, 'hidden');
+
+            ReactTestUtils.Simulate.focus(inputs[1]);
+        }
+
+        render(0, 0, 0);
+
+        render(1, 1, 1);
+
+        render(1, 2, 1);
+    });
+
+    it('should not to change current tab when only content of active tab is rendered', () => {
+        let tabs = ReactTestUtils.renderIntoDocument(
+            <Tabs name="tabs" renderActiveTabContentOnly>
+                <TabLink to="tab1" />
+                <TabLink to="tab2" />
+                <TabContent for="tab1"><input /></TabContent>
+                <TabContent for="tab2"><input /></TabContent>
+            </Tabs>
+        );
+
+        const tabContents = ReactTestUtils.scryRenderedDOMComponentsWithClass(tabs, 'tab-content');
+        const inputs = ReactTestUtils.scryRenderedDOMComponentsWithTag(tabs, 'input');
+
+        assert.equal(inputs.length, 1);
+
+        assert.equal(findDOMNode(tabContents[0]).style.overflow, '');
+        assert.equal(findDOMNode(tabContents[1]).style.overflow, 'hidden');
+    });
+
+    it('should not to call internal "setState"', () => {
+        let tabs = ReactTestUtils.renderIntoDocument(
+            <Tabs name="tabs" handleSelect={(tab) => {
+                // prevents from internal setState executing
+            }}>
+                <TabLink to="tab1" />
+                <TabLink to="tab2" />
+                <TabContent for="tab1"><input /></TabContent>
+                <TabContent for="tab2"><input /></TabContent>
+            </Tabs>
+        );
+
+        const tabContents = ReactTestUtils.scryRenderedDOMComponentsWithClass(tabs, 'tab-content');
+        const inputs = ReactTestUtils.scryRenderedDOMComponentsWithTag(tabs, 'input');
+
+        assert.equal(inputs.length, 2);
+
+        assert.equal(findDOMNode(tabContents[0]).style.overflow, '');
+        assert.equal(findDOMNode(tabContents[1]).style.overflow, 'hidden');
+
+        ReactTestUtils.Simulate.focus(inputs[1]);
+
+        assert.equal(findDOMNode(tabContents[0]).style.overflow, '');
+        assert.equal(findDOMNode(tabContents[1]).style.overflow, 'hidden');
     });
 });

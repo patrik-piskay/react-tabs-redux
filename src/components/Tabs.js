@@ -68,8 +68,17 @@ class Tabs extends Component {
             }
 
             if (child.props && child.props.for) {
+                let isVisible = child.props.for === selectedTab;
+
                 return React.cloneElement(child, {
-                    isVisible: child.props.for === selectedTab,
+                    onFocus: (e) => {
+                        if (!isVisible) {
+                            handleSelect(child.props.for, name);
+                        }
+                        let { onFocus = () => {} } = child.props;
+                        onFocus(e);
+                    },
+                    isVisible,
                     visibleStyle: visibleTabStyle,
                     disableInlineStyles,
                     renderActiveTabContentOnly: this.props.renderActiveTabContentOnly
