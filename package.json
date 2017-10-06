@@ -1,25 +1,23 @@
 {
   "name": "react-tabs-redux",
   "version": "1.6.0",
-  "description": "Simple, fully customizable React tabs component that can be used in plain React application or with any Flux-like architecture, e.g. Redux",
+  "description":
+    "Simple, fully customizable React tabs component that can be used in plain React application or with any Flux-like architecture, e.g. Redux",
   "main": "lib/index.js",
   "scripts": {
     "clean": "rimraf lib dist",
     "build": "babel ./src -d lib",
     "build:dist": "npm run build:umd && npm run build:umd:min",
     "build:umd": "NODE_ENV=production webpack src/index.js dist/react-tabs.js",
-    "build:umd:min": "NODE_ENV=production webpack -p src/index.js dist/react-tabs.min.js",
+    "build:umd:min":
+      "NODE_ENV=production webpack -p src/index.js dist/react-tabs.min.js",
     "lint": "eslint src && npm run lint-examples",
-    "lint-examples": "cd examples/redux && npm run lint && cd ../plain-react && npm run lint",
+    "lint-examples":
+      "cd examples/redux && npm run lint && cd ../plain-react && npm run lint",
     "test": "karma start --single-run",
-    "prettier": "prettier --write --single-quote --tab-width 4 --print-width 100 \"src/**/*.js\" \"test/**/*.js\""
+    "prettier": "prettier --write \"src/**/*.js\" \"test/**/*.js\""
   },
-  "keywords": [
-    "react",
-    "tabs",
-    "redux",
-    "flux"
-  ],
+  "keywords": ["react", "tabs", "redux", "flux"],
   "author": "Patrik Piskay",
   "repository": {
     "type": "git",
@@ -34,7 +32,8 @@
     "babel-plugin-transform-object-rest-spread": "^6.3.13",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
-    "eslint": "^1.10.3",
+    "eslint": "^4.8.0",
+    "eslint-config-prettier": "^2.6.0",
     "eslint-plugin-react": "^3.14.0",
     "karma": "^0.13.19",
     "karma-chrome-launcher": "^0.2.2",
@@ -44,7 +43,7 @@
     "karma-sourcemap-loader": "^0.3.6",
     "karma-webpack": "^1.7.0",
     "mocha": "^2.3.4",
-    "prettier": "^1.1.0",
+    "prettier": "^1.7.4",
     "react": "^0.14.5",
     "react-addons-test-utils": "^0.14.6",
     "react-dom": "^0.14.6",

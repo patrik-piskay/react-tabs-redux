@@ -6,169 +6,188 @@ import ReactTestUtils from 'react-addons-test-utils';
 import TabLink, { defaultActiveStyle } from '../src/components/TabLink.js';
 
 describe('TabLink component', () => {
-    it('should have correct props set on an inactive tab', () => {
-        const linkStyle = { color: 'red' };
+  it('should have correct props set on an inactive tab', () => {
+    const linkStyle = { color: 'red' };
 
-        let renderer = ReactTestUtils.createRenderer();
-        renderer.render(<TabLink to="tab1" handleSelect={() => {}} style={linkStyle} />);
-        const result = renderer.getRenderOutput();
+    let renderer = ReactTestUtils.createRenderer();
+    renderer.render(
+      <TabLink to="tab1" handleSelect={() => {}} style={linkStyle} />,
+    );
+    const result = renderer.getRenderOutput();
 
-        assert.equal(result.props.className, 'tab-link');
-        assert.deepEqual(result.props.style, linkStyle);
+    assert.equal(result.props.className, 'tab-link');
+    assert.deepEqual(result.props.style, linkStyle);
+  });
+
+  it('should have correct props set on an active tab', () => {
+    const linkStyle = { color: 'red' };
+
+    let renderer = ReactTestUtils.createRenderer();
+    renderer.render(
+      <TabLink
+        to="tab1"
+        handleSelect={() => {}}
+        style={linkStyle}
+        isActive={true}
+      />,
+    );
+    const result = renderer.getRenderOutput();
+
+    assert.equal(result.props.className, 'tab-link tab-link-active');
+    assert.deepEqual(result.props.style, {
+      ...linkStyle,
+      ...defaultActiveStyle,
     });
+  });
 
-    it('should have correct props set on an active tab', () => {
-        const linkStyle = { color: 'red' };
+  it('should have "activeStyle" prop content set on an active tab when provided (instead of default active style)', () => {
+    const linkStyle = { color: 'red' };
+    const activeStyle = { textDecoration: 'underline' };
 
-        let renderer = ReactTestUtils.createRenderer();
-        renderer.render(
-            <TabLink to="tab1" handleSelect={() => {}} style={linkStyle} isActive={true} />
-        );
-        const result = renderer.getRenderOutput();
+    let renderer = ReactTestUtils.createRenderer();
+    renderer.render(
+      <TabLink
+        to="tab1"
+        handleSelect={() => {}}
+        style={linkStyle}
+        isActive={true}
+        activeStyle={activeStyle}
+      />,
+    );
+    const result = renderer.getRenderOutput();
 
-        assert.equal(result.props.className, 'tab-link tab-link-active');
-        assert.deepEqual(result.props.style, {
-            ...linkStyle,
-            ...defaultActiveStyle
-        });
+    assert.equal(result.props.className, 'tab-link tab-link-active');
+    assert.deepEqual(result.props.style, {
+      ...linkStyle,
+      ...activeStyle,
     });
+  });
 
-    it('should have "activeStyle" prop content set on an active tab when provided (instead of default active style)', () => {
-        const linkStyle = { color: 'red' };
-        const activeStyle = { textDecoration: 'underline' };
+  it('should have onClick handler set', () => {
+    let renderer = ReactTestUtils.createRenderer();
+    renderer.render(<TabLink to="tab1" handleSelect={() => {}} />);
+    const result = renderer.getRenderOutput();
 
-        let renderer = ReactTestUtils.createRenderer();
-        renderer.render(
-            <TabLink
-                to="tab1"
-                handleSelect={() => {}}
-                style={linkStyle}
-                isActive={true}
-                activeStyle={activeStyle}
-            />
-        );
-        const result = renderer.getRenderOutput();
+    assert.equal(typeof result.props.onClick, 'function');
+  });
 
-        assert.equal(result.props.className, 'tab-link tab-link-active');
-        assert.deepEqual(result.props.style, {
-            ...linkStyle,
-            ...activeStyle
-        });
-    });
+  it('should call "handleSelect" function on click providing "tab" and "namespace" values', () => {
+    let clickedTab = '';
+    let clickedNamespace = '';
 
-    it('should have onClick handler set', () => {
-        let renderer = ReactTestUtils.createRenderer();
-        renderer.render(<TabLink to="tab1" handleSelect={() => {}} />);
-        const result = renderer.getRenderOutput();
+    let renderer = ReactTestUtils.createRenderer();
+    renderer.render(
+      <TabLink
+        to="tab1"
+        namespace="tabs"
+        handleSelect={(tab, namespace) => {
+          clickedTab = tab;
+          clickedNamespace = namespace;
+        }}
+      />,
+    );
+    const result = renderer.getRenderOutput();
 
-        assert.equal(typeof result.props.onClick, 'function');
-    });
+    result.props.onClick();
 
-    it('should call "handleSelect" function on click providing "tab" and "namespace" values', () => {
-        let clickedTab = '';
-        let clickedNamespace = '';
+    assert.equal(clickedTab, 'tab1');
+    assert.equal(clickedNamespace, 'tabs');
+  });
 
-        let renderer = ReactTestUtils.createRenderer();
-        renderer.render(
-            <TabLink
-                to="tab1"
-                namespace="tabs"
-                handleSelect={(tab, namespace) => {
-                    clickedTab = tab;
-                    clickedNamespace = namespace;
-                }}
-            />
-        );
-        const result = renderer.getRenderOutput();
+  it('should call custom "onChange" function if provided', () => {
+    let clickedTab = '';
+    let clickedNamespace = '';
+    let customOnClick = false;
 
-        result.props.onClick();
+    let renderer = ReactTestUtils.createRenderer();
+    renderer.render(
+      <TabLink
+        to="tab1"
+        namespace="tabs"
+        handleSelect={(tab, namespace) => {
+          clickedTab = tab;
+          clickedNamespace = namespace;
+        }}
+        onClick={() => {
+          customOnClick = true;
+        }}
+      />,
+    );
+    const result = renderer.getRenderOutput();
 
-        assert.equal(clickedTab, 'tab1');
-        assert.equal(clickedNamespace, 'tabs');
-    });
+    result.props.onClick();
 
-    it('should call custom "onChange" function if provided', () => {
-        let clickedTab = '';
-        let clickedNamespace = '';
-        let customOnClick = false;
+    assert.equal(clickedTab, 'tab1');
+    assert.equal(clickedNamespace, 'tabs');
+    assert.equal(customOnClick, true);
+  });
 
-        let renderer = ReactTestUtils.createRenderer();
-        renderer.render(
-            <TabLink
-                to="tab1"
-                namespace="tabs"
-                handleSelect={(tab, namespace) => {
-                    clickedTab = tab;
-                    clickedNamespace = namespace;
-                }}
-                onClick={() => {
-                    customOnClick = true;
-                }}
-            />
-        );
-        const result = renderer.getRenderOutput();
+  it('should have "isActive" prop when initialized', () => {
+    let tabs = ReactTestUtils.renderIntoDocument(
+      <TabLink to="tab1" isActive={true} handleSelect={() => {}} />,
+    );
 
-        result.props.onClick();
+    const tabLink = ReactTestUtils.findRenderedDOMComponentWithClass(
+      tabs,
+      'tab-link',
+    );
 
-        assert.equal(clickedTab, 'tab1');
-        assert.equal(clickedNamespace, 'tabs');
-        assert.equal(customOnClick, true);
-    });
+    assert.equal(
+      findDOMNode(tabLink).getAttribute('class'),
+      'tab-link tab-link-active',
+    );
+  });
 
-    it('should have "isActive" prop when initialized', () => {
-        let tabs = ReactTestUtils.renderIntoDocument(
-            <TabLink to="tab1" isActive={true} handleSelect={() => {}} />
-        );
+  it('should not set inline styles when "disableInlineStyles" props is set', () => {
+    const linkStyle = { color: 'red' };
 
-        const tabLink = ReactTestUtils.findRenderedDOMComponentWithClass(tabs, 'tab-link');
+    let renderer = ReactTestUtils.createRenderer();
+    renderer.render(
+      <TabLink
+        to="tab1"
+        handleSelect={() => {}}
+        style={linkStyle}
+        isActive={true}
+        disableInlineStyles={true}
+      />,
+    );
+    const result = renderer.getRenderOutput();
 
-        assert.equal(findDOMNode(tabLink).getAttribute('class'), 'tab-link tab-link-active');
-    });
+    assert.equal(result.props.style, undefined);
+  });
 
-    it('should not set inline styles when "disableInlineStyles" props is set', () => {
-        const linkStyle = { color: 'red' };
+  it('should support custom class names', () => {
+    let renderer = ReactTestUtils.createRenderer();
 
-        let renderer = ReactTestUtils.createRenderer();
-        renderer.render(
-            <TabLink
-                to="tab1"
-                handleSelect={() => {}}
-                style={linkStyle}
-                isActive={true}
-                disableInlineStyles={true}
-            />
-        );
-        const result = renderer.getRenderOutput();
+    renderer.render(<TabLink to="tab1" isActive={true} />);
 
-        assert.equal(result.props.style, undefined);
-    });
+    const result1 = renderer.getRenderOutput();
 
-    it('should support custom class names', () => {
-        let renderer = ReactTestUtils.createRenderer();
+    renderer.render(
+      <TabLink
+        to="tab1"
+        isActive={true}
+        className="tab-link-custom"
+        activeClassName="tab-link-custom--active"
+      />,
+    );
 
-        renderer.render(<TabLink to="tab1" isActive={true} />);
+    const result2 = renderer.getRenderOutput();
 
-        const result1 = renderer.getRenderOutput();
+    assert.equal(
+      result1.props.className
+        .split(' ')
+        .sort()
+        .join(' '),
+      'tab-link tab-link-active',
+    );
 
-        renderer.render(
-            <TabLink
-                to="tab1"
-                isActive={true}
-                className="tab-link-custom"
-                activeClassName="tab-link-custom--active"
-            />
-        );
-
-        const result2 = renderer.getRenderOutput();
-
-        assert.equal(
-            result1.props.className.split(' ').sort().join(' '),
-            'tab-link tab-link-active'
-        );
-
-        assert.equal(
-            result2.props.className.split(' ').sort().join(' '),
-            'tab-link-custom tab-link-custom--active'
-        );
-    });
+    assert.equal(
+      result2.props.className
+        .split(' ')
+        .sort()
+        .join(' '),
+      'tab-link-custom tab-link-custom--active',
+    );
+  });
 });
