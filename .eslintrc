@@ -1,10 +1,13 @@
 {
-    "extends": "eslint:recommended",
-    
-    "ecmaFeatures": {
-        "modules": true,
-        "jsx": true,
-        "experimentalObjectRestSpread": true
+    "extends": ["eslint:recommended", "prettier"],
+
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true,
+            "experimentalObjectRestSpread": true
+        }
     },
 
     "env": {
@@ -18,17 +21,6 @@
     ],
 
     "rules": {
-        "semi": [2, "always"],
-        "indent": [2, 4],
-        "quotes": [2, "single", "avoid-escape"],
-        "no-multi-spaces": 2,
-        "no-trailing-spaces": 2,
-        "space-before-blocks": [2, "always"],
-        "brace-style": [2, "1tbs", { "allowSingleLine": true }],
-        "object-curly-spacing": [2, "always"],
-
-        "jsx-quotes": [2, "prefer-double"],
-        
         "react/display-name": 0,
         "react/jsx-boolean-value": 0,
         "react/jsx-no-undef": 2,
