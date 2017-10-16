@@ -2,21 +2,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class Tabs extends Component {
-  constructor() {
-    super();
+  state = {
+    selectedTab: null,
+  };
 
-    this.state = {
-      selectedTab: null,
-    };
-
-    this.handleSelect = this.handleSelect.bind(this);
-  }
-
-  handleSelect(tab) {
+  handleSelect = tab => {
     this.setState({
       selectedTab: tab,
     });
-  }
+  };
 
   findDefault(children) {
     if (this.defaultTab) {

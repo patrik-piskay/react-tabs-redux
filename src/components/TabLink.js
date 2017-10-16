@@ -7,38 +7,53 @@ export const defaultActiveStyle = {
 };
 
 class TabLink extends Component {
-  constructor() {
-    super();
-
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick(e) {
+  handleClick = e => {
     this.props.handleSelect(this.props.to, this.props.namespace);
 
     if (this.props.onClick) {
       this.props.onClick(e);
     }
-  }
+  };
+
+  handleKeyPress = e => {
+    if (e.key === ' ' || e.key === 'Enter') {
+      e.preventDefault();
+
+      this.handleClick(e);
+    }
+  };
 
   render() {
-    const disableInlineStyles = this.props.disableInlineStyles;
-    const className = this.props.className || 'tab-link';
-    const activeClassName = this.props.activeClassName || 'tab-link-active';
-    const style = {
-      ...this.props.style,
-      ...((this.props.isActive &&
-        (this.props.activeStyle || defaultActiveStyle)) ||
-        {}),
+    const {
+      to,
+      handleSelect,
+      isActive,
+      namespace,
+      activeStyle,
+      disableInlineStyles,
+      className,
+      activeClassName,
+      style,
+      ...passedProps
+    } = this.props;
+
+    const _className = className || 'tab-link';
+    const _activeClassName = activeClassName || 'tab-link-active';
+    const _style = {
+      ...style,
+      ...((isActive && (activeStyle || defaultActiveStyle)) || {}),
     };
 
     return (
       <div
         className={classNames({
-          [className]: true,
-          [activeClassName]: this.props.isActive,
+          [_className]: true,
+          [_activeClassName]: isActive,
         })}
-        style={(!disableInlineStyles && style) || undefined}
+        style={(!disableInlineStyles && _style) || undefined}
+        tabIndex="0"
+        {...passedProps}
+        onKeyPress={this.handleKeyPress}
         onClick={this.handleClick}
       >
         {this.props.children}
@@ -56,6 +71,7 @@ TabLink.propTypes = {
   disableInlineStyles: PropTypes.bool,
   className: PropTypes.string,
   activeClassName: PropTypes.string,
+  style: PropTypes.object,
 };
 
 export default TabLink;
