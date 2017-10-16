@@ -16,6 +16,7 @@ describe('TabLink component', () => {
     const result = renderer.getRenderOutput();
 
     assert.equal(result.props.className, 'tab-link');
+    assert.equal(result.props.tabIndex, '0');
     assert.deepEqual(result.props.style, linkStyle);
   });
 
@@ -34,10 +35,28 @@ describe('TabLink component', () => {
     const result = renderer.getRenderOutput();
 
     assert.equal(result.props.className, 'tab-link tab-link-active');
+    assert.equal(result.props.tabIndex, '0');
     assert.deepEqual(result.props.style, {
       ...linkStyle,
       ...defaultActiveStyle,
     });
+  });
+
+  it('should pass extra props to TabLink', () => {
+    let renderer = ReactTestUtils.createRenderer();
+    renderer.render(
+      <TabLink
+        to="tab1"
+        handleSelect={() => {}}
+        isActive={true}
+        tabIndex="-1"
+        disabled={true}
+      />,
+    );
+    const result = renderer.getRenderOutput();
+
+    assert.equal(result.props.tabIndex, '-1');
+    assert.equal(result.props.disabled, true);
   });
 
   it('should have "activeStyle" prop content set on an active tab when provided (instead of default active style)', () => {

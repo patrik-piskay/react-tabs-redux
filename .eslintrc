@@ -1,6 +1,6 @@
 {
     "extends": ["eslint:recommended", "prettier"],
-
+    "parser": "babel-eslint",
     "parserOptions": {
         "ecmaVersion": 6,
         "sourceType": "module",
@@ -21,6 +21,7 @@
     ],
 
     "rules": {
+        "no-unused-vars": [2, { "ignoreRestSiblings": true }],
         "react/display-name": 0,
         "react/jsx-boolean-value": 0,
         "react/jsx-no-undef": 2,

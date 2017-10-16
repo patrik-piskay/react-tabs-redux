@@ -3,3 +3,4 @@ dist
 lib
 *.orig
 *.log
+examples/**/package-lock.json
