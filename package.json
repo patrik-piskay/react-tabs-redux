@@ -1,23 +1,25 @@
 {
   "name": "react-tabs-redux",
-  "version": "2.0.0",
-  "description":
-    "Simple, fully customizable React tabs component that can be used in plain React application or with any Flux-like architecture, e.g. Redux",
+  "version": "2.0.1",
+  "description": "Simple, fully customizable React tabs component that can be used in plain React application or with any Flux-like architecture, e.g. Redux",
   "main": "lib/index.js",
   "scripts": {
     "clean": "rimraf lib dist",
     "build": "babel ./src -d lib",
     "build:dist": "npm run build:umd && npm run build:umd:min",
     "build:umd": "NODE_ENV=production webpack src/index.js dist/react-tabs.js",
-    "build:umd:min":
-      "NODE_ENV=production webpack -p src/index.js dist/react-tabs.min.js",
+    "build:umd:min": "NODE_ENV=production webpack -p src/index.js dist/react-tabs.min.js",
     "lint": "eslint src && npm run lint-examples",
-    "lint-examples":
-      "cd examples/redux && npm run lint && cd ../plain-react && npm run lint",
+    "lint-examples": "cd examples/redux && npm run lint && cd ../plain-react && npm run lint",
     "test": "karma start --single-run",
     "prettier": "prettier --write \"src/**/*.js\" \"test/**/*.js\""
   },
-  "keywords": ["react", "tabs", "redux", "flux"],
+  "keywords": [
+    "react",
+    "tabs",
+    "redux",
+    "flux"
+  ],
   "author": "Patrik Piskay",
   "repository": {
     "type": "git",
