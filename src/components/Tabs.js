@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import TabLink from './TabLink';
+import TabContent from './TabContent';
+
 class Tabs extends Component {
   state = {
     selectedTab: null,
@@ -25,7 +28,7 @@ class Tabs extends Component {
         return;
       }
 
-      if (child.props.to) {
+      if (child.type === TabLink) {
         firstLink = firstLink || child.props.to;
         firstDefaultLink =
           firstDefaultLink || (child.props.default && child.props.to);
@@ -59,7 +62,8 @@ class Tabs extends Component {
       if (!child) {
         return child;
       }
-      if (child.props && child.props.to) {
+
+      if (child.type === TabLink) {
         return React.cloneElement(child, {
           handleSelect,
           isActive: child.props.to === selectedTab,
@@ -69,7 +73,7 @@ class Tabs extends Component {
         });
       }
 
-      if (child.props && child.props.for) {
+      if (child.type === TabContent) {
         return React.cloneElement(child, {
           isVisible: child.props.for === selectedTab,
           visibleStyle: visibleTabStyle,
