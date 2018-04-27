@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import TabLink from './TabLink';
-import TabContent from './TabContent';
-
 class Tabs extends Component {
   state = {
     selectedTab: null,
