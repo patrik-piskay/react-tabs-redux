@@ -28,7 +28,7 @@ class Tabs extends Component {
         return;
       }
 
-      if (child.type === TabLink) {
+      if (child.type.name === 'TabLink') {
         firstLink = firstLink || child.props.to;
         firstDefaultLink =
           firstDefaultLink || (child.props.default && child.props.to);
@@ -63,7 +63,7 @@ class Tabs extends Component {
         return child;
       }
 
-      if (child.type === TabLink) {
+      if (child.type.name === 'TabLink') {
         return React.cloneElement(child, {
           handleSelect,
           isActive: child.props.to === selectedTab,
@@ -73,7 +73,7 @@ class Tabs extends Component {
         });
       }
 
-      if (child.type === TabContent) {
+      if (child.type.name === 'TabContent') {
         return React.cloneElement(child, {
           isVisible: child.props.for === selectedTab,
           visibleStyle: visibleTabStyle,
