@@ -7,6 +7,8 @@ export const defaultActiveStyle = {
 };
 
 class TabLink extends Component {
+  static displayName = 'TabLink';
+
   handleClick = e => {
     this.props.handleSelect(this.props.to, this.props.namespace);
 

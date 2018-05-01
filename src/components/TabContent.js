@@ -9,6 +9,8 @@ export const styles = {
 };
 
 class TabContent extends Component {
+  static displayName = 'TabContent';
+
   canRenderChildren() {
     return this.props.isVisible || !this.props.renderActiveTabContentOnly;
   }
