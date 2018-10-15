@@ -41,6 +41,7 @@ const App = (props) => (
             className="tabs tabs-1"
             handleSelect={props.changeSelectedTab}
             selectedTab={props.tabs1}
+            onChange={(tab, namespace) => console.log(`Tab selected: ${tab} in namespace ${namespace}`)} //eslint-disable-line no-console
         >
             <div className="tab-links">
                 <TabLink to="tab1">Tab1</TabLink>
@@ -73,6 +74,7 @@ const App = (props) => (
         <Tabs
             name="tabs2"
             handleSelect={props.changeSelectedTab}
+            onChange={(tab, namespace) => console.log(`Tab selected: ${tab} in namespace ${namespace}`)} //eslint-disable-line no-console
             selectedTab={props.tabs2}
             activeLinkStyle={styles.activeLinkStyle}
             visibleTabStyle={styles.visibleTabStyle}

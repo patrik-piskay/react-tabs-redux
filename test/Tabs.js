@@ -316,8 +316,6 @@ describe('Tabs component', () => {
   });
 
   it('should set "disableInlineStyles" prop to each child component', () => {
-    const activeLinkStyle = { color: 'red' };
-
     let renderer = ReactTestUtils.createRenderer();
     renderer.render(
       <Tabs name="tabs" disableInlineStyles={true}>
@@ -333,5 +331,36 @@ describe('Tabs component', () => {
     tabsChildren.forEach(child => {
       assert.equal(child.props.disableInlineStyles, true);
     });
+  });
+
+  it('should call "onChange" function on tab change', () => {
+    const clicks = [];
+
+    const onChange = (selectedTab, selectedNamespace) => {
+      clicks.push([selectedTab, selectedNamespace]);
+    };
+
+    let tabs = ReactTestUtils.renderIntoDocument(
+      <Tabs name="tabs" onChange={onChange}>
+        <TabLink to="tab1" />
+        <TabLink to="tab2" default />
+      </Tabs>,
+    );
+
+    const tabLinks = ReactTestUtils.scryRenderedDOMComponentsWithClass(
+      tabs,
+      'tab-link',
+    );
+
+    // onChange should be called after the initial render
+    assert.deepEqual(clicks, [['tab2', 'tabs']]);
+
+    ReactTestUtils.Simulate.click(tabLinks[1]);
+
+    assert.deepEqual(clicks, [['tab2', 'tabs']]);
+
+    ReactTestUtils.Simulate.click(tabLinks[0]);
+
+    assert.deepEqual(clicks, [['tab2', 'tabs'], ['tab1', 'tabs']]);
   });
 });
