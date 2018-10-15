@@ -37,7 +37,10 @@ const styles = {
 
 const App = () => (
     <div>
-        <Tabs className="tabs tabs-1">
+        <Tabs
+            className="tabs tabs-1"
+            onChange={(tab) => console.log(`Tab selected: ${tab}`)} //eslint-disable-line no-console
+        >
             <div className="tab-links">
                 <TabLink to="tab1">Tab1</TabLink>
                 <TabLink to="tab2">Tab2</TabLink>

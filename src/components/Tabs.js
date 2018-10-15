@@ -3,8 +3,27 @@ import PropTypes from 'prop-types';
 
 class Tabs extends Component {
   state = {
-    selectedTab: null,
+    selectedTab:
+      this.props.selectedTab || this.findDefault(this.props.children),
   };
+
+  componentDidMount() {
+    this.props.onChange(this.state.selectedTab, this.props.name);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.selectedTab !== prevState.selectedTab) {
+      this.props.onChange(this.state.selectedTab, this.props.name);
+    }
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (this.props.selectedTab !== newProps.selectedTab) {
+      this.setState({
+        selectedTab: newProps.selectedTab,
+      });
+    }
+  }
 
   handleSelect = tab => {
     this.setState({
@@ -13,10 +32,6 @@ class Tabs extends Component {
   };
 
   findDefault(children) {
-    if (this.defaultTab) {
-      return this.defaultTab;
-    }
-
     let firstLink;
     let firstDefaultLink;
 
@@ -36,8 +51,7 @@ class Tabs extends Component {
 
     React.Children.forEach(children, traverse);
 
-    this.defaultTab = firstDefaultLink || firstLink;
-    return this.defaultTab;
+    return firstDefaultLink || firstLink;
   }
 
   transformChildren(
@@ -105,14 +119,10 @@ class Tabs extends Component {
       ...divProps
     } = this.props;
     const handleSelect = handleSelectProp || this.handleSelect;
-    const selectedTab =
-      selectedTabProp ||
-      this.state.selectedTab ||
-      this.findDefault(this.props.children);
 
     const children = this.transformChildren(this.props.children, {
       handleSelect,
-      selectedTab,
+      selectedTab: this.state.selectedTab,
       activeLinkStyle,
       visibleTabStyle,
       disableInlineStyles,
@@ -125,12 +135,17 @@ class Tabs extends Component {
 
 Tabs.propTypes = {
   name: PropTypes.string,
+  onChange: PropTypes.func,
   handleSelect: PropTypes.func,
   selectedTab: PropTypes.string,
   activeLinkStyle: PropTypes.object,
   visibleTabStyle: PropTypes.object,
   disableInlineStyles: PropTypes.bool,
   renderActiveTabContentOnly: PropTypes.bool,
+};
+
+Tabs.defaultProps = {
+  onChange: () => {},
 };
 
 export default Tabs;
