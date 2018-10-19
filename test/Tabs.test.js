@@ -1,5 +1,6 @@
 import assert from 'assert';
 import React from 'react';
+import TestRenderer from 'react-test-renderer';
 import ShallowRenderer from 'react-test-renderer/shallow';
 import ReactTestUtils from 'react-dom/test-utils';
 
@@ -347,5 +348,18 @@ describe('Tabs component', () => {
     ReactTestUtils.Simulate.click(tabLinks[0]);
 
     assert.deepEqual(clicks, [['tab2', 'tabs'], ['tab1', 'tabs']]);
+  });
+
+  it('should set correct "component" prop to <TabLink /> component', () => {
+    const tabs = TestRenderer.create(
+      <Tabs name="tabs" tabComponent="div">
+        <TabLink to="tab1" />
+        <TabLink to="tab2" component="a" />
+      </Tabs>,
+    );
+    const tabLinks = tabs.toJSON().children;
+
+    assert.equal(tabLinks[0].type, 'div');
+    assert.equal(tabLinks[1].type, 'a');
   });
 });
