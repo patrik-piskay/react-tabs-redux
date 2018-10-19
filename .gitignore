@@ -1,6 +1,11 @@
 node_modules
-dist
-lib
+/es
+/lib
+/umd
+/demo/dist
+public
+npm-debug.log*
 *.orig
-*.log
-examples/**/package-lock.json
+package-lock.json
+yarn-error.log
+.cache

@@ -1,10 +1,32 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+const findDefaultTab = children => {
+  let firstLink;
+  let firstDefaultLink;
+
+  const traverse = child => {
+    if (!child || !child.props || firstDefaultLink) {
+      return;
+    }
+
+    if (child.type.displayName === 'TabLink') {
+      firstLink = firstLink || child.props.to;
+      firstDefaultLink =
+        firstDefaultLink || (child.props.default && child.props.to);
+    }
+
+    React.Children.forEach(child.props.children, traverse);
+  };
+
+  React.Children.forEach(children, traverse);
+
+  return firstDefaultLink || firstLink;
+};
+
 class Tabs extends Component {
   state = {
-    selectedTab:
-      this.props.selectedTab || this.findDefault(this.props.children),
+    selectedTab: this.props.selectedTab || findDefaultTab(this.props.children),
   };
 
   componentDidMount() {
@@ -30,29 +52,6 @@ class Tabs extends Component {
       selectedTab: tab,
     });
   };
-
-  findDefault(children) {
-    let firstLink;
-    let firstDefaultLink;
-
-    const traverse = child => {
-      if (!child || !child.props || firstDefaultLink) {
-        return;
-      }
-
-      if (child.type.displayName === 'TabLink') {
-        firstLink = firstLink || child.props.to;
-        firstDefaultLink =
-          firstDefaultLink || (child.props.default && child.props.to);
-      }
-
-      React.Children.forEach(child.props.children, traverse);
-    };
-
-    React.Children.forEach(children, traverse);
-
-    return firstDefaultLink || firstLink;
-  }
 
   transformChildren(
     children,
@@ -126,7 +125,7 @@ class Tabs extends Component {
       activeLinkStyle,
       visibleTabStyle,
       disableInlineStyles,
-      name: name,
+      name,
     });
 
     return <div {...divProps}>{children}</div>;
@@ -135,6 +134,7 @@ class Tabs extends Component {
 
 Tabs.propTypes = {
   name: PropTypes.string,
+  children: PropTypes.node,
   onChange: PropTypes.func,
   handleSelect: PropTypes.func,
   selectedTab: PropTypes.string,

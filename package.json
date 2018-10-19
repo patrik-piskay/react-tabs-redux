@@ -2,62 +2,66 @@
   "name": "react-tabs-redux",
   "version": "3.0.2",
   "description": "Simple, fully customizable React tabs component that can be used in plain React application or with any Flux-like architecture, e.g. Redux",
-  "main": "lib/index.js",
-  "scripts": {
-    "clean": "rimraf lib dist",
-    "build": "babel ./src -d lib",
-    "build:dist": "npm run build:umd && npm run build:umd:min",
-    "build:umd": "NODE_ENV=production webpack src/index.js dist/react-tabs.js",
-    "build:umd:min": "NODE_ENV=production webpack -p src/index.js dist/react-tabs.min.js",
-    "lint": "eslint src && npm run lint-examples",
-    "lint-examples": "cd examples/redux && npm run lint && cd ../plain-react && npm run lint",
-    "test": "karma start --single-run",
-    "prettier": "prettier --write \"src/**/*.js\" \"test/**/*.js\""
-  },
-  "keywords": [
-    "react",
-    "tabs",
-    "redux",
-    "flux"
-  ],
   "author": "Patrik Piskay",
   "repository": {
     "type": "git",
     "url": "https://github.com/patrik-piskay/react-tabs-redux"
   },
   "license": "MIT",
+  "keywords": [
+    "react",
+    "tabs",
+    "redux",
+    "flux"
+  ],
+  "main": "lib/index.js",
+  "jsnext:main": "es/index.js",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "scripts": {
+    "start": "nwb serve-react-demo",
+    "build": "nwb build-react-component",
+    "clean": "nwb clean-module && nwb clean-demo",
+    "lint": "eslint src && eslint demo",
+    "test": "yarn lint && yarn test:browser",
+    "test:browser": "nwb test --single-run",
+    "prettier": "prettier --write \"src/**/*.js\" \"test/**/*.js\"",
+    "release": "release-it"
+  },
   "devDependencies": {
-    "babel-cli": "^6.3.17",
-    "babel-core": "^6.3.26",
-    "babel-eslint": "^8.0.1",
-    "babel-loader": "^6.2.1",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.3.13",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-react": "^6.24.1",
+    "babel-eslint": "^8.0.0",
     "eslint": "^4.9.0",
+    "eslint-config-airbnb": "16.0.0",
     "eslint-config-prettier": "^2.6.0",
-    "eslint-plugin-react": "^3.14.0",
-    "karma": "^0.13.19",
-    "karma-chrome-launcher": "^0.2.2",
-    "karma-firefox-launcher": "^0.1.7",
-    "karma-mocha": "^0.2.1",
-    "karma-mocha-reporter": "^1.1.5",
-    "karma-sourcemap-loader": "^0.3.6",
-    "karma-webpack": "^1.7.0",
-    "mocha": "^2.5.3",
-    "prettier": "^1.7.4",
-    "react": "^0.14.5",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "7.4.0",
+    "husky": "^1.1.2",
+    "lint-staged": "^7.3.0",
+    "nwb": "^0.23.0",
+    "prettier": "^1.14.3",
+    "react": "^16.5.2",
     "react-addons-test-utils": "^0.14.6",
-    "react-dom": "^0.14.6",
-    "rimraf": "^2.5.0",
-    "webpack": "^1.12.9"
+    "react-dom": "^16.5.2",
+    "react-redux": "^5.0.7",
+    "react-test-renderer": "^16.5.2",
+    "redux": "^4.0.1",
+    "release-it": "^7.6.2"
   },
   "peerDependencies": {
     "react": "^0.14.5 || >=15"
   },
   "dependencies": {
-    "classnames": "^2.2.3",
-    "prop-types": "^15.5.7"
+    "classnames": "^2.2.6",
+    "prop-types": "^15.6.2"
   }
 }

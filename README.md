@@ -2,7 +2,7 @@
 
 [![Travis](https://img.shields.io/travis/patrik-piskay/react-tabs-redux.svg?style=flat-square)](https://travis-ci.org/patrik-piskay/react-tabs-redux) [![npm](https://img.shields.io/npm/v/react-tabs-redux.svg?style=flat-square)](https://www.npmjs.com/package/react-tabs-redux)
 
-Simple, fully customizable React tabs component that can be used in plain React application or with any Flux-like architecture with external application state, e.g. Redux.
+Simple, fully customizable, accessible React tabs component that can be used in plain React application or with any Flux-like architecture with external application state, e.g. Redux.
 
 ![React Tabs](https://res.cloudinary.com/web-development/image/upload/v1452427467/anim_fazjn9.gif)
 
@@ -24,7 +24,7 @@ with components accessible via `window.ReactTabs` object.
 
 ## Usage
 
-* **with plain React** (using component's internal state) - [see example](https://github.com/patrik-piskay/react-tabs-redux/tree/master/examples/plain-react)
+- **with plain React** (using component's internal state) - [see example](https://github.com/patrik-piskay/react-tabs-redux/tree/master/examples/plain-react)
 
 ```jsx
 <Tabs>
@@ -38,7 +38,7 @@ with components accessible via `window.ReactTabs` object.
 </Tabs>
 ```
 
-* **with Redux** (or any other external state management library) - [see example](https://github.com/patrik-piskay/react-tabs-redux/tree/master/examples/redux)
+- **with Redux** (or any other external state management library) - [see example](https://github.com/patrik-piskay/react-tabs-redux/tree/master/examples/redux)
 
 The only change needed from _plain React_ example is to provide `handleSelect` and `selectedTab` (`name` as well if you want to have multiple `<Tabs />` instances in your app) props to `<Tabs />` component so that you are able to save and retrieve information about which tab is currently active from your external application state.
 
@@ -140,16 +140,31 @@ If, for performance or other reasons, you wish to render only the content of the
 
 ### `<Tabs />` props
 
-| Prop name                  | Type                          | Default value | Description                                                                                                                                                                                                               |
-| :------------------------- | :---------------------------- | :------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| name                       | _string_                      |               | Sets namespace of a `<Tabs />` component. Useful when multiple instances are used                                                                                                                                         |
-| onChange                   | _function(selectedTab, name)_ |               | Called everytime the selected tab is changed. _(it gets called for the initial selected tab too)_                                                                                                                         |
+| Prop name                  | Type                          | Default value | Description                                                                                                                                                                                                           |
+| :------------------------- | :---------------------------- | :------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name                       | _string_                      |               | Sets namespace of a `<Tabs />` component. Useful when multiple instances are used                                                                                                                                     |
+| onChange                   | _function(selectedTab, name)_ |               | Called everytime the selected tab is changed. _(it gets called for the initial selected tab too)_                                                                                                                     |
 | handleSelect               | _function(tab, name)_         |               | **(Optional) control prop** - called everytime a Tab Link is clicked <br><br> _Useful in an "external state" scenario (Redux, etc.), use `onChange` for tracking purposes._                                           |
 | selectedTab                | _string_                      |               | **(Optional) control prop** - controls which tab is currently active. <br><br> _Useful in an "external state" scenario (Redux, etc.), when not set, the `<Tabs />` component will maintain the "selected tab" state._ |
-| activeLinkStyle            | _object_                      |               | Style that gets applied to the selected `<TabLink />`                                                                                                                                                                     |
-| visibleTabStyle            | _object_                      |               | Style that gets applied to the visible `<TabContent />`                                                                                                                                                                   |
-| disableInlineStyles        | _boolean_                     | false         | Useful if you are using `className` to style the components and don't want the default inline styles to get applied.                                                                                                      |
-| renderActiveTabContentOnly | _boolean_                     | false         | _Performance_: When set, only the visible content gets actually rendered to DOM _(instead of all `<TabContent />` being rendered and hidden)_.                                                                            |
+| activeLinkStyle            | _object_                      |               | Style that gets applied to the selected `<TabLink />`                                                                                                                                                                 |
+| visibleTabStyle            | _object_                      |               | Style that gets applied to the visible `<TabContent />`                                                                                                                                                               |
+| disableInlineStyles        | _boolean_                     | false         | Useful if you are using `className` to style the components and don't want the default inline styles to get applied.                                                                                                  |
+| renderActiveTabContentOnly | _boolean_                     | false         | _Performance_: When set, only the visible content gets actually rendered to DOM _(instead of all `<TabContent />` being rendered and hidden)_.                                                                        |
+
+### `<TabLink />` props
+
+| Prop name       | Type     | Default value     | Description                                                           |
+| :-------------- | :------- | ----------------- | --------------------------------------------------------------------- |
+| component       | _string_ | "button"          | DOM element `<TabLink />` renders to.                                 |
+| className       | _string_ | "tab-link"        | Class name that's applied to <TabLink /> elements                     |
+| activeClassName | _string_ | "tab-link-active" | Class name that's applied to the <TabLink /> element when it's active |
+
+### `<TabContent />` props
+
+| Prop name | Type | Default value | Description |
+| :-------------- | :------- | ----------------- | --------------------------------------------------------------------- | |
+| className | _string_ | "tab-content" | Class name that's applied to <TabContent /> elements |
+| activeClassName | _string_ | "tab-content-visible" | Class name that's applied to the <TabContent /> element when it's visible |
 
 ---
 
@@ -210,7 +225,7 @@ By default, react-tabs-redux will apply `display: none` styles to the appropriat
 
 ---
 
-In each [example](https://github.com/patrik-piskay/react-tabs-redux/tree/master/examples) there is one `<Tabs />` components styled using class names and the other one styled using inline styles.
+In each [example](https://github.com/patrik-piskay/react-tabs-redux/tree/master/demo) there is one `<Tabs />` components styled using class names and the other one styled using inline styles.
 
 ## License
 

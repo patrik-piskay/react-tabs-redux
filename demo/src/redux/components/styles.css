@@ -1,0 +1,65 @@
+#redux .tabs {
+  width: 400px;
+  display: inline-block;
+  margin-right: 30px;
+  vertical-align: top;
+}
+
+#redux .tabs-1 .tab-links {
+  margin: 0;
+  padding: 0;
+  border: 1px solid #ccc;
+  border-bottom: 1px solid #868686;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  height: 35px;
+  position: relative;
+  top: 5px;
+}
+
+#redux .tabs-1 .tab-link {
+  padding: 0 15px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  display: inline-block;
+  position: relative;
+  height: 40px;
+  line-height: 41px;
+  top: -4px;
+  left: -1px;
+  outline: none;
+}
+
+#redux .tabs-1 .tab-link:hover,
+#redux .tabs-1 .tab-link:focus {
+  color: #666464;
+}
+
+#redux .tabs-1 .tab-link-active,
+#redux .tabs-1 .tab-link-active:hover,
+#redux .tabs-1 .tab-link-active:focus {
+  color: black;
+  font-weight: bold;
+  border: 1px solid #868686;
+  border-bottom: 1px solid white;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: white;
+}
+
+#redux .tabs-1 .content {
+  padding: 15px;
+  border: 1px solid #868686;
+  border-top: 1px solid transparent;
+}
+
+#redux .tabs-1 .tabcontent: {
+}
+
+#redux code {
+  display: inline-block;
+  margin-bottom: 30px;
+  padding: 5px;
+  background-color: #e8e8e8;
+}

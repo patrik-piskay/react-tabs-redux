@@ -1,12 +1,12 @@
 import assert from 'assert';
 import React from 'react';
-import ReactTestUtils from 'react-addons-test-utils';
+import ShallowRenderer from 'react-test-renderer/shallow';
 
-import TabContent, { styles } from '../src/components/TabContent.js';
+import TabContent, { styles } from '../src/components/TabContent';
 
 describe('TabContent component', () => {
   it('should have correct default values set', () => {
-    let renderer = ReactTestUtils.createRenderer();
+    const renderer = new ShallowRenderer();
     renderer.render(<TabContent for="tab1" />);
     const result1 = renderer.getRenderOutput();
 
@@ -14,13 +14,16 @@ describe('TabContent component', () => {
     const result2 = renderer.getRenderOutput();
 
     assert.equal(result1.props.className, 'tab-content');
+    assert.equal(result1.props.id, 'tabpanel-tab1');
+    assert.equal(result1.props.role, 'tabpanel');
+    assert.equal(result1.props['aria-labelledby'], 'tab-tab1');
     assert.deepEqual(result1.props.style, styles.hidden);
     assert.deepEqual(result2.props.style, styles.hidden);
   });
 
   it('should not set hidden styles when "isVisible" prop is set', () => {
-    let renderer = ReactTestUtils.createRenderer();
-    renderer.render(<TabContent for="tab1" isVisible={true} />);
+    const renderer = new ShallowRenderer();
+    renderer.render(<TabContent for="tab1" isVisible />);
     const result = renderer.getRenderOutput();
 
     assert.deepEqual(result.props.style, {});
@@ -28,8 +31,8 @@ describe('TabContent component', () => {
 
   it('should use custom styles when provided', () => {
     const style = { backgroundColor: 'green' };
-    let renderer = ReactTestUtils.createRenderer();
-    renderer.render(<TabContent for="tab1" isVisible={true} style={style} />);
+    const renderer = new ShallowRenderer();
+    renderer.render(<TabContent for="tab1" isVisible style={style} />);
     const result = renderer.getRenderOutput();
 
     assert.deepEqual(result.props.style, {
@@ -40,15 +43,10 @@ describe('TabContent component', () => {
 
   it('should not set inline styles when "disableInlineStyles" props is set', () => {
     const style = { backgroundColor: 'green' };
-    let renderer = ReactTestUtils.createRenderer();
+    const renderer = new ShallowRenderer();
 
     renderer.render(
-      <TabContent
-        for="tab1"
-        isVisible={true}
-        style={style}
-        disableInlineStyles={true}
-      />,
+      <TabContent for="tab1" isVisible style={style} disableInlineStyles />,
     );
     const result = renderer.getRenderOutput();
 
@@ -56,16 +54,16 @@ describe('TabContent component', () => {
   });
 
   it('should support custom class names', () => {
-    let renderer = ReactTestUtils.createRenderer();
+    const renderer = new ShallowRenderer();
 
-    renderer.render(<TabContent for="tab1" isVisible={true} />);
+    renderer.render(<TabContent for="tab1" isVisible />);
 
     const result1 = renderer.getRenderOutput();
 
     renderer.render(
       <TabContent
         for="tab1"
-        isVisible={true}
+        isVisible
         className="test-custom-class"
         visibleClassName="test-custom-class--visible"
       />,

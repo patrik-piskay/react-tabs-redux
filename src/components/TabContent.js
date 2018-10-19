@@ -18,19 +18,24 @@ class TabContent extends Component {
   render() {
     const visibleStyle = this.props.visibleStyle || {};
     const displayStyle = this.props.isVisible ? visibleStyle : styles.hidden;
-    const disableInlineStyles = this.props.disableInlineStyles;
     const className = this.props.className || 'tab-content';
     const visibleClassName =
       this.props.visibleClassName || 'tab-content-visible';
 
     return (
       <div
+        id={`tabpanel-${this.props.for}`}
+        role="tabpanel"
+        aria-labelledby={`tab-${this.props.for}`}
         className={classNames({
           [className]: true,
           [visibleClassName]: !!this.props.isVisible,
         })}
         style={
-          (!disableInlineStyles && { ...this.props.style, ...displayStyle }) ||
+          (!this.props.disableInlineStyles && {
+            ...this.props.style,
+            ...displayStyle,
+          }) ||
           undefined
         }
       >
@@ -41,13 +46,15 @@ class TabContent extends Component {
 }
 
 TabContent.propTypes = {
-  for: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  children: PropTypes.node,
+  for: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired, // eslint-disable-line react/no-unused-prop-types
   visibleStyle: PropTypes.object,
   isVisible: PropTypes.bool,
   renderActiveTabContentOnly: PropTypes.bool,
   disableInlineStyles: PropTypes.bool,
   className: PropTypes.string,
   visibleClassName: PropTypes.string,
+  style: PropTypes.object,
 };
 
 export default TabContent;
