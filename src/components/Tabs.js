@@ -62,6 +62,7 @@ class Tabs extends Component {
       visibleTabStyle,
       disableInlineStyles,
       name,
+      tabComponent,
     },
   ) {
     if (typeof children !== 'object') {
@@ -79,6 +80,7 @@ class Tabs extends Component {
           activeStyle: activeLinkStyle,
           disableInlineStyles,
           namespace: name,
+          component: child.props.component || tabComponent,
         });
       }
 
@@ -101,6 +103,7 @@ class Tabs extends Component {
           visibleTabStyle,
           disableInlineStyles,
           name,
+          tabComponent,
         }),
       );
     });
@@ -115,6 +118,7 @@ class Tabs extends Component {
       disableInlineStyles,
       name,
       renderActiveTabContentOnly, // eslint-disable-line
+      tabComponent,
       ...divProps
     } = this.props;
     const handleSelect = handleSelectProp || this.handleSelect;
@@ -126,6 +130,7 @@ class Tabs extends Component {
       visibleTabStyle,
       disableInlineStyles,
       name,
+      tabComponent,
     });
 
     return <div {...divProps}>{children}</div>;
@@ -134,6 +139,7 @@ class Tabs extends Component {
 
 Tabs.propTypes = {
   name: PropTypes.string,
+  tabComponent: PropTypes.string,
   children: PropTypes.node,
   onChange: PropTypes.func,
   handleSelect: PropTypes.func,

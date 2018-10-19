@@ -150,6 +150,7 @@ If, for performance or other reasons, you wish to render only the content of the
 | visibleTabStyle            | _object_                      |               | Style that gets applied to the visible `<TabContent />`                                                                                                                                                               |
 | disableInlineStyles        | _boolean_                     | false         | Useful if you are using `className` to style the components and don't want the default inline styles to get applied.                                                                                                  |
 | renderActiveTabContentOnly | _boolean_                     | false         | _Performance_: When set, only the visible content gets actually rendered to DOM _(instead of all `<TabContent />` being rendered and hidden)_.                                                                        |
+| tabComponent               | _string_                      |               | DOM element all `<TabLink />` render to. <br><br>_This can be set on `<TabLink />` level too, by setting the `component` prop on `<TabLink />` components._                                                           |
 
 ### `<TabLink />` props
 

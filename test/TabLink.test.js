@@ -209,4 +209,12 @@ describe('TabLink component', () => {
       'tab-link-custom tab-link-custom--active',
     );
   });
+
+  it('should render into "div"', () => {
+    const renderer = new ShallowRenderer();
+    renderer.render(<TabLink to="tab1" component="div" />);
+    const result = renderer.getRenderOutput();
+
+    assert.equal(result.type, 'div');
+  });
 });
