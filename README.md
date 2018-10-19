@@ -161,9 +161,9 @@ If, for performance or other reasons, you wish to render only the content of the
 
 ### `<TabContent />` props
 
-| Prop name | Type | Default value | Description |
-| :-------------- | :------- | ----------------- | --------------------------------------------------------------------- | |
-| className | _string_ | "tab-content" | Class name that's applied to <TabContent /> elements |
+| Prop name       | Type     | Default value         | Description                                                               |
+| :-------------- | :------- | --------------------- | ------------------------------------------------------------------------- |
+| className       | _string_ | "tab-content"         | Class name that's applied to <TabContent /> elements                      |
 | activeClassName | _string_ | "tab-content-visible" | Class name that's applied to the <TabContent /> element when it's visible |
 
 ---
