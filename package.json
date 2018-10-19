@@ -8,12 +8,8 @@
     "url": "https://github.com/patrik-piskay/react-tabs-redux"
   },
   "license": "MIT",
-  "keywords": [
-    "react",
-    "tabs",
-    "redux",
-    "flux"
-  ],
+  "keywords": ["react", "tabs", "redux", "flux"],
+  "files": ["es", "lib", "umd"],
   "main": "lib/index.js",
   "jsnext:main": "es/index.js",
   "husky": {
@@ -22,10 +18,7 @@
     }
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.js": ["prettier --write", "git add"]
   },
   "scripts": {
     "start": "nwb serve-react-demo",
