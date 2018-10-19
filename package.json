@@ -1,6 +1,6 @@
 {
   "name": "react-tabs-redux",
-  "version": "4.0.0-beta.0",
+  "version": "4.0.0-beta.1",
   "description": "Simple, fully customizable React tabs component that can be used in plain React application or with any Flux-like architecture, e.g. Redux",
   "author": "Patrik Piskay",
   "repository": {
@@ -8,8 +8,17 @@
     "url": "https://github.com/patrik-piskay/react-tabs-redux"
   },
   "license": "MIT",
-  "keywords": ["react", "tabs", "redux", "flux"],
-  "files": ["es", "lib", "umd"],
+  "keywords": [
+    "react",
+    "tabs",
+    "redux",
+    "flux"
+  ],
+  "files": [
+    "es",
+    "lib",
+    "umd"
+  ],
   "main": "lib/index.js",
   "jsnext:main": "es/index.js",
   "husky": {
@@ -18,7 +27,10 @@
     }
   },
   "lint-staged": {
-    "*.js": ["prettier --write", "git add"]
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "scripts": {
     "start": "nwb serve-react-demo",
