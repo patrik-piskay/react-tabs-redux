@@ -45,28 +45,35 @@ class TabLink extends Component {
       ...style,
       ...((isActive && (activeStyle || defaultActiveStyle)) || {}),
     };
+    const componentType = this.props.component || 'button';
 
-    return (
-      <div
-        className={classNames({
+    return React.createElement(
+      componentType,
+      {
+        id: `tab-${to}`,
+        role: 'tab',
+        'aria-selected': isActive ? 'true' : 'false',
+        'aria-controls': `tabpanel-${to}`,
+        className: classNames({
           [_className]: true,
           [_activeClassName]: isActive,
-        })}
-        style={(!disableInlineStyles && _style) || undefined}
-        tabIndex="0"
-        {...passedProps}
-        onKeyPress={this.handleKeyPress}
-        onClick={this.handleClick}
-      >
-        {this.props.children}
-      </div>
+        }),
+        style: (!disableInlineStyles && _style) || undefined,
+        ...passedProps,
+        onKeyPress: this.handleKeyPress,
+        onClick: this.handleClick,
+      },
+      this.props.children,
     );
   }
 }
 
 TabLink.propTypes = {
   to: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  component: PropTypes.string,
   handleSelect: PropTypes.func,
+  onClick: PropTypes.func,
+  children: PropTypes.node,
   isActive: PropTypes.bool,
   namespace: PropTypes.string,
   activeStyle: PropTypes.object,

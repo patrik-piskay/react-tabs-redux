@@ -1,41 +1,44 @@
 import assert from 'assert';
 import React from 'react';
-import { findDOMNode } from 'react-dom';
-import ReactTestUtils from 'react-addons-test-utils';
+import ShallowRenderer from 'react-test-renderer/shallow';
+import ReactTestUtils from 'react-dom/test-utils';
 
-import TabLink, { defaultActiveStyle } from '../src/components/TabLink.js';
+import TabLink, { defaultActiveStyle } from '../src/components/TabLink';
 
 describe('TabLink component', () => {
   it('should have correct props set on an inactive tab', () => {
     const linkStyle = { color: 'red' };
 
-    let renderer = ReactTestUtils.createRenderer();
+    const renderer = new ShallowRenderer();
     renderer.render(
       <TabLink to="tab1" handleSelect={() => {}} style={linkStyle} />,
     );
     const result = renderer.getRenderOutput();
 
+    assert.equal(result.type, 'button');
     assert.equal(result.props.className, 'tab-link');
-    assert.equal(result.props.tabIndex, '0');
+    assert.equal(result.props.id, 'tab-tab1');
+    assert.equal(result.props.role, 'tab');
+    assert.equal(result.props['aria-selected'], 'false');
+    assert.equal(result.props['aria-controls'], 'tabpanel-tab1');
     assert.deepEqual(result.props.style, linkStyle);
   });
 
   it('should have correct props set on an active tab', () => {
     const linkStyle = { color: 'red' };
 
-    let renderer = ReactTestUtils.createRenderer();
+    const renderer = new ShallowRenderer();
     renderer.render(
-      <TabLink
-        to="tab1"
-        handleSelect={() => {}}
-        style={linkStyle}
-        isActive={true}
-      />,
+      <TabLink to="tab1" handleSelect={() => {}} style={linkStyle} isActive />,
     );
     const result = renderer.getRenderOutput();
 
+    assert.equal(result.type, 'button');
     assert.equal(result.props.className, 'tab-link tab-link-active');
-    assert.equal(result.props.tabIndex, '0');
+    assert.equal(result.props.id, 'tab-tab1');
+    assert.equal(result.props.role, 'tab');
+    assert.equal(result.props['aria-selected'], 'true');
+    assert.equal(result.props['aria-controls'], 'tabpanel-tab1');
     assert.deepEqual(result.props.style, {
       ...linkStyle,
       ...defaultActiveStyle,
@@ -43,14 +46,14 @@ describe('TabLink component', () => {
   });
 
   it('should pass extra props to TabLink', () => {
-    let renderer = ReactTestUtils.createRenderer();
+    const renderer = new ShallowRenderer();
     renderer.render(
       <TabLink
         to="tab1"
         handleSelect={() => {}}
-        isActive={true}
+        isActive
         tabIndex="-1"
-        disabled={true}
+        disabled
       />,
     );
     const result = renderer.getRenderOutput();
@@ -63,13 +66,13 @@ describe('TabLink component', () => {
     const linkStyle = { color: 'red' };
     const activeStyle = { textDecoration: 'underline' };
 
-    let renderer = ReactTestUtils.createRenderer();
+    const renderer = new ShallowRenderer();
     renderer.render(
       <TabLink
         to="tab1"
         handleSelect={() => {}}
         style={linkStyle}
-        isActive={true}
+        isActive
         activeStyle={activeStyle}
       />,
     );
@@ -83,7 +86,7 @@ describe('TabLink component', () => {
   });
 
   it('should have onClick handler set', () => {
-    let renderer = ReactTestUtils.createRenderer();
+    const renderer = new ShallowRenderer();
     renderer.render(<TabLink to="tab1" handleSelect={() => {}} />);
     const result = renderer.getRenderOutput();
 
@@ -94,7 +97,7 @@ describe('TabLink component', () => {
     let clickedTab = '';
     let clickedNamespace = '';
 
-    let renderer = ReactTestUtils.createRenderer();
+    const renderer = new ShallowRenderer();
     renderer.render(
       <TabLink
         to="tab1"
@@ -118,7 +121,7 @@ describe('TabLink component', () => {
     let clickedNamespace = '';
     let customOnClick = false;
 
-    let renderer = ReactTestUtils.createRenderer();
+    const renderer = new ShallowRenderer();
     renderer.render(
       <TabLink
         to="tab1"
@@ -142,8 +145,8 @@ describe('TabLink component', () => {
   });
 
   it('should have "isActive" prop when initialized', () => {
-    let tabs = ReactTestUtils.renderIntoDocument(
-      <TabLink to="tab1" isActive={true} handleSelect={() => {}} />,
+    const tabs = ReactTestUtils.renderIntoDocument(
+      <TabLink to="tab1" isActive handleSelect={() => {}} />,
     );
 
     const tabLink = ReactTestUtils.findRenderedDOMComponentWithClass(
@@ -151,23 +154,20 @@ describe('TabLink component', () => {
       'tab-link',
     );
 
-    assert.equal(
-      findDOMNode(tabLink).getAttribute('class'),
-      'tab-link tab-link-active',
-    );
+    assert.equal(tabLink.getAttribute('class'), 'tab-link tab-link-active');
   });
 
   it('should not set inline styles when "disableInlineStyles" props is set', () => {
     const linkStyle = { color: 'red' };
 
-    let renderer = ReactTestUtils.createRenderer();
+    const renderer = new ShallowRenderer();
     renderer.render(
       <TabLink
         to="tab1"
         handleSelect={() => {}}
         style={linkStyle}
-        isActive={true}
-        disableInlineStyles={true}
+        isActive
+        disableInlineStyles
       />,
     );
     const result = renderer.getRenderOutput();
@@ -176,16 +176,16 @@ describe('TabLink component', () => {
   });
 
   it('should support custom class names', () => {
-    let renderer = ReactTestUtils.createRenderer();
+    const renderer = new ShallowRenderer();
 
-    renderer.render(<TabLink to="tab1" isActive={true} />);
+    renderer.render(<TabLink to="tab1" isActive />);
 
     const result1 = renderer.getRenderOutput();
 
     renderer.render(
       <TabLink
         to="tab1"
-        isActive={true}
+        isActive
         className="tab-link-custom"
         activeClassName="tab-link-custom--active"
       />,

@@ -1,16 +1,16 @@
 import assert from 'assert';
 import React from 'react';
-import { findDOMNode } from 'react-dom';
-import ReactTestUtils from 'react-addons-test-utils';
+import ShallowRenderer from 'react-test-renderer/shallow';
+import ReactTestUtils from 'react-dom/test-utils';
 
-import Tabs from '../src/components/Tabs.js';
-import { TabLink, TabContent } from '../src/index.js';
+import Tabs from '../src/components/Tabs';
+import { TabLink, TabContent } from '../src/index';
 
 describe('Tabs component', () => {
   it('should have correct default values set', () => {
     const style = { backgroundColor: 'green' };
 
-    let renderer = ReactTestUtils.createRenderer();
+    const renderer = new ShallowRenderer();
     renderer.render(
       <Tabs className="tabs" style={style}>
         <TabLink to="tab1" />
@@ -25,7 +25,7 @@ describe('Tabs component', () => {
   });
 
   it('should set correct default props to each <TabLink /> component', () => {
-    let renderer = ReactTestUtils.createRenderer();
+    const renderer = new ShallowRenderer();
     renderer.render(
       <Tabs name="tabs">
         <TabLink to="tab1" />
@@ -46,7 +46,7 @@ describe('Tabs component', () => {
   it('should set "activeLinkStyle" prop to each <TabLink /> component', () => {
     const activeLinkStyle = { color: 'red' };
 
-    let renderer = ReactTestUtils.createRenderer();
+    const renderer = new ShallowRenderer();
     renderer.render(
       <Tabs name="tabs" activeLinkStyle={activeLinkStyle}>
         <TabLink to="tab1" />
@@ -62,7 +62,7 @@ describe('Tabs component', () => {
   });
 
   it('should set correct default props to each <TabContent /> component', () => {
-    let renderer = ReactTestUtils.createRenderer();
+    const renderer = new ShallowRenderer();
     renderer.render(
       <Tabs name="tabs">
         <TabContent for="tab1" />
@@ -78,7 +78,7 @@ describe('Tabs component', () => {
   });
 
   it('should set the first TabLink to active and its content to visible when initialized', () => {
-    let tabs = ReactTestUtils.renderIntoDocument(
+    const tabs = ReactTestUtils.renderIntoDocument(
       <Tabs name="tabs">
         <TabLink to="tab1" />
         <TabLink to="tab2" />
@@ -96,18 +96,15 @@ describe('Tabs component', () => {
       'tab-content',
     );
 
-    assert.equal(
-      findDOMNode(tabLinks[0]).getAttribute('class'),
-      'tab-link tab-link-active',
-    );
-    assert.equal(findDOMNode(tabLinks[1]).getAttribute('class'), 'tab-link');
+    assert.equal(tabLinks[0].getAttribute('class'), 'tab-link tab-link-active');
+    assert.equal(tabLinks[1].getAttribute('class'), 'tab-link');
 
-    assert.equal(findDOMNode(tabContents[0]).style.display, '');
-    assert.equal(findDOMNode(tabContents[1]).style.display, 'none');
+    assert.equal(tabContents[0].style.display, '');
+    assert.equal(tabContents[1].style.display, 'none');
   });
 
   it('should set the TabLink with "default" prop to active and its content to visible when initialized', () => {
-    let tabs = ReactTestUtils.renderIntoDocument(
+    const tabs = ReactTestUtils.renderIntoDocument(
       <Tabs name="tabs">
         <TabLink to="tab1" />
         <TabLink to="tab2" default />
@@ -125,18 +122,15 @@ describe('Tabs component', () => {
       'tab-content',
     );
 
-    assert.equal(findDOMNode(tabLinks[0]).getAttribute('class'), 'tab-link');
-    assert.equal(
-      findDOMNode(tabLinks[1]).getAttribute('class'),
-      'tab-link tab-link-active',
-    );
+    assert.equal(tabLinks[0].getAttribute('class'), 'tab-link');
+    assert.equal(tabLinks[1].getAttribute('class'), 'tab-link tab-link-active');
 
-    assert.equal(findDOMNode(tabContents[0]).style.display, 'none');
-    assert.equal(findDOMNode(tabContents[1]).style.display, '');
+    assert.equal(tabContents[0].style.display, 'none');
+    assert.equal(tabContents[1].style.display, '');
   });
 
   it('should set TabContent to visible when TabLink is clicked', () => {
-    let tabs = ReactTestUtils.renderIntoDocument(
+    const tabs = ReactTestUtils.renderIntoDocument(
       <Tabs name="tabs">
         <TabLink to="tab1" />
         <TabLink to="tab2" />
@@ -156,31 +150,25 @@ describe('Tabs component', () => {
 
     ReactTestUtils.Simulate.click(tabLinks[1]);
 
-    assert.equal(findDOMNode(tabLinks[0]).getAttribute('class'), 'tab-link');
-    assert.equal(
-      findDOMNode(tabLinks[1]).getAttribute('class'),
-      'tab-link tab-link-active',
-    );
+    assert.equal(tabLinks[0].getAttribute('class'), 'tab-link');
+    assert.equal(tabLinks[1].getAttribute('class'), 'tab-link tab-link-active');
 
+    assert.equal(tabContents[0].getAttribute('class'), 'tab-content');
+    assert.equal(tabContents[0].style.display, 'none');
     assert.equal(
-      findDOMNode(tabContents[0]).getAttribute('class'),
-      'tab-content',
-    );
-    assert.equal(findDOMNode(tabContents[0]).style.display, 'none');
-    assert.equal(
-      findDOMNode(tabContents[1]).getAttribute('class'),
+      tabContents[1].getAttribute('class'),
       'tab-content tab-content-visible',
     );
-    assert.equal(findDOMNode(tabContents[1]).style.display, '');
+    assert.equal(tabContents[1].style.display, '');
   });
 
   it('should use custom styles for visible TabContent', () => {
     const visibleTabStyle = {
-      display: 'flex',
+      display: 'inline-block',
       backgroundColor: 'red',
     };
 
-    let tabs = ReactTestUtils.renderIntoDocument(
+    const tabs = ReactTestUtils.renderIntoDocument(
       <Tabs name="tabs" visibleTabStyle={visibleTabStyle}>
         <TabLink to="tab1" default />
         <TabContent for="tab1" />
@@ -192,8 +180,8 @@ describe('Tabs component', () => {
       'tab-content',
     );
 
-    assert.equal(findDOMNode(tabContents[0]).style.display, 'flex');
-    assert.equal(findDOMNode(tabContents[0]).style.backgroundColor, 'red');
+    assert.equal(tabContents[0].style.display, 'inline-block');
+    assert.equal(tabContents[0].style.backgroundColor, 'red');
   });
 
   it('should call custom "handleSelect" function when TabLink is clicked', () => {
@@ -205,7 +193,7 @@ describe('Tabs component', () => {
       namespace = selectedNamespace;
     };
 
-    let tabs = ReactTestUtils.renderIntoDocument(
+    const tabs = ReactTestUtils.renderIntoDocument(
       <Tabs name="tabs" handleSelect={customSelectHandler}>
         <TabLink to="tab1" />
         <TabLink to="tab2" />
@@ -228,7 +216,7 @@ describe('Tabs component', () => {
   });
 
   it('should use "selectedTab" prop on <Tabs /> to set selected tab', () => {
-    let tabs = ReactTestUtils.renderIntoDocument(
+    const tabs = ReactTestUtils.renderIntoDocument(
       <Tabs name="tabs" selectedTab="tab2">
         <TabLink to="tab1" />
         <TabLink to="tab2" />
@@ -246,18 +234,15 @@ describe('Tabs component', () => {
       'tab-content',
     );
 
-    assert.equal(findDOMNode(tabLinks[0]).getAttribute('class'), 'tab-link');
-    assert.equal(
-      findDOMNode(tabLinks[1]).getAttribute('class'),
-      'tab-link tab-link-active',
-    );
+    assert.equal(tabLinks[0].getAttribute('class'), 'tab-link');
+    assert.equal(tabLinks[1].getAttribute('class'), 'tab-link tab-link-active');
 
-    assert.equal(findDOMNode(tabContents[0]).style.display, 'none');
-    assert.equal(findDOMNode(tabContents[1]).style.display, '');
+    assert.equal(tabContents[0].style.display, 'none');
+    assert.equal(tabContents[1].style.display, '');
   });
 
   it('should render only content of active tab', () => {
-    let tabs = ReactTestUtils.renderIntoDocument(
+    const tabs = ReactTestUtils.renderIntoDocument(
       <Tabs name="tabs" selectedTab="tab2" renderActiveTabContentOnly>
         <TabLink to="tab1" />
         <TabLink to="tab2" />
@@ -271,12 +256,12 @@ describe('Tabs component', () => {
       'tab-content',
     );
 
-    assert.equal(findDOMNode(tabContents[0]).textContent, '');
-    assert.equal(findDOMNode(tabContents[1]).textContent, 'tabcontent2');
+    assert.equal(tabContents[0].textContent, '');
+    assert.equal(tabContents[1].textContent, 'tabcontent2');
   });
 
   it('should render content of all tab, not just the active one', () => {
-    let tabs = ReactTestUtils.renderIntoDocument(
+    const tabs = ReactTestUtils.renderIntoDocument(
       <Tabs name="tabs" selectedTab="tab2">
         <TabLink to="tab1" />
         <TabLink to="tab2" />
@@ -290,12 +275,12 @@ describe('Tabs component', () => {
       'tab-content',
     );
 
-    assert.equal(findDOMNode(tabContents[0]).textContent, 'tabcontent1');
-    assert.equal(findDOMNode(tabContents[1]).textContent, 'tabcontent2');
+    assert.equal(tabContents[0].textContent, 'tabcontent1');
+    assert.equal(tabContents[1].textContent, 'tabcontent2');
   });
   it('should not crash when a child is null', () => {
-    let showTab3 = false;
-    let tabs = ReactTestUtils.renderIntoDocument(
+    const showTab3 = false;
+    const tabs = ReactTestUtils.renderIntoDocument(
       <Tabs name="tabs" selectedTab="tab2">
         <TabLink to="tab1" />
         <TabLink to="tab2" />
@@ -311,14 +296,14 @@ describe('Tabs component', () => {
       'tab-content',
     );
 
-    assert.equal(findDOMNode(tabContents[0]).textContent, 'tabcontent1');
-    assert.equal(findDOMNode(tabContents[1]).textContent, 'tabcontent2');
+    assert.equal(tabContents[0].textContent, 'tabcontent1');
+    assert.equal(tabContents[1].textContent, 'tabcontent2');
   });
 
   it('should set "disableInlineStyles" prop to each child component', () => {
-    let renderer = ReactTestUtils.createRenderer();
+    const renderer = new ShallowRenderer();
     renderer.render(
-      <Tabs name="tabs" disableInlineStyles={true}>
+      <Tabs name="tabs" disableInlineStyles>
         <TabLink to="tab1" />
         <TabLink disableInlineStyles={false} to="tab2" />
         <TabContent for="tab1" />
@@ -340,7 +325,7 @@ describe('Tabs component', () => {
       clicks.push([selectedTab, selectedNamespace]);
     };
 
-    let tabs = ReactTestUtils.renderIntoDocument(
+    const tabs = ReactTestUtils.renderIntoDocument(
       <Tabs name="tabs" onChange={onChange}>
         <TabLink to="tab1" />
         <TabLink to="tab2" default />
