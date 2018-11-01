@@ -8,8 +8,8 @@ Simple, fully customizable, accessible React tabs component that can be used in 
 
 ## Installation
 
-Using npm:
-
+    $ yarn add react-tabs-redux
+    or
     $ npm install react-tabs-redux
 
 UMD build is also available:
