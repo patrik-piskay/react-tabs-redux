@@ -81,6 +81,7 @@ TabLink.propTypes = {
   className: PropTypes.string,
   activeClassName: PropTypes.string,
   style: PropTypes.object,
+  default: PropTypes.bool
 };
 
 export default TabLink;
