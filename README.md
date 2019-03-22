@@ -154,11 +154,12 @@ If, for performance or other reasons, you wish to render only the content of the
 
 ### `<TabLink />` props
 
-| Prop name       | Type     | Default value     | Description                                                           |
-| :-------------- | :------- | ----------------- | --------------------------------------------------------------------- |
-| component       | _string_ | "button"          | DOM element `<TabLink />` renders to.                                 |
-| className       | _string_ | "tab-link"        | Class name that's applied to <TabLink /> elements                     |
-| activeClassName | _string_ | "tab-link-active" | Class name that's applied to the <TabLink /> element when it's active |
+| Prop name       | Type      | Default value     | Description                                                           |
+| :-------------- | :-------- | ----------------- | --------------------------------------------------------------------- |
+| component       | _string_  | "button"          | DOM element `<TabLink />` renders to.                                 |
+| className       | _string_  | "tab-link"        | Class name that's applied to <TabLink /> elements                     |
+| activeClassName | _string_  | "tab-link-active" | Class name that's applied to the <TabLink /> element when it's active |
+| default         | _boolean_ |                   | Set tab as default                                                    |
 
 ### `<TabContent />` props
 
