@@ -12,16 +12,6 @@ Simple, fully customizable, accessible React tabs component that can be used in 
     or
     $ npm install react-tabs-redux
 
-UMD build is also available:
-
-```html
-<script src="https://unpkg.com/react-tabs-redux/dist/react-tabs.min.js"></script>
-```
-
-with components accessible via `window.ReactTabs` object.
-
-**_NOTE:_** _This component requires_ **_React_** _to be installed separately._
-
 ## Usage
 
 - **with plain React** (using component's internal state) - [see example](https://github.com/patrik-piskay/react-tabs-redux/tree/master/examples/plain-react)
